@@ -46,8 +46,8 @@ class getAsesorCuenta extends SugarApi
               left join email_addr_bean_rel eb on eb.bean_id = u.id
               left join email_addresses e on e.id = eb.email_address_id
               where ap.accounts_uni_productos_1accounts_ida = '{$idCuenta}'
-              and eb.deleted=0
-              and e.deleted=0
+              and ifnull(eb.deleted,0) = 0
+              and ifnull(e.deleted,0) = 0
               and p.tipo_producto ='{$idProducto}'
               limit 1";
 
@@ -72,8 +72,8 @@ class getAsesorCuenta extends SugarApi
                   left join email_addr_bean_rel eb on eb.bean_id = u.id
                   left join email_addresses e on e.id = eb.email_address_id
                   where uc.equipo_c = '{$equipo}'
-                  and eb.deleted=0
-                  and e.deleted=0
+                  and ifnull(eb.deleted,0) = 0
+                  and ifnull(e.deleted,0) = 0
                   and uc.posicion_operativa_c like '%^1^%'
                   and u.status = 'Active'
                   limit 1";
@@ -99,8 +99,8 @@ class getAsesorCuenta extends SugarApi
                   left join email_addr_bean_rel eb on eb.bean_id = u.id
                   left join email_addresses e on e.id = eb.email_address_id
                   where uc.equipos_c like '%^{$equipo}^%'
-                  and eb.deleted=0
-                  and e.deleted=0
+                  and ifnull(eb.deleted,0) = 0
+                  and ifnull(e.deleted,0) = 0
                   and uc.posicion_operativa_c like '%^2^%'
                   and u.status = 'Active'
                   limit 1";
