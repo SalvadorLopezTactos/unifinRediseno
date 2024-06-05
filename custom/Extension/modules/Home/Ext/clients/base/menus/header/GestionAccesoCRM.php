@@ -7,5 +7,5 @@ $viewdefs['Home']['base']['menu']['header'][] = array(
     'route'=>'#Home/layout/GestionAccesoCRM',
     'label' =>'Gestión de acceso a CRM',
     'acl_module'=>'Home',
-    'icon' => 'fa-calendar',
+    'icon' => 'sicon-calendar-lg',
 );

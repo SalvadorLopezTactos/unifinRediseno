@@ -286,7 +286,7 @@ array (
                   array (
                     'type' => 'rowaction',
                     'event' => 'button:llamada_mobile:click',
-                    'css_class' => 'llamada_mobile btn fa fa-phone fa-large btn-success',
+                    'css_class' => 'llamada_mobile btn sicon sicon-phone fa-large btn-success',
                   ),
                   1 => 
                   array (
@@ -312,7 +312,7 @@ array (
                   array (
                     'type' => 'rowaction',
                     'event' => 'button:llamada_home:click',
-                    'css_class' => 'llamada_home btn fa fa-phone fa-large btn-success',
+                    'css_class' => 'llamada_home btn sicon sicon-phone fa-large btn-success',
                   ),
                   1 => 
                   array (
@@ -332,7 +332,7 @@ array (
                   array (
                     'type' => 'rowaction',
                     'event' => 'button:llamada_work:click',
-                    'css_class' => 'llamada_work btn fa fa-phone fa-large btn-success',
+                    'css_class' => 'llamada_work btn sicon sicon-phone fa-large btn-success',
                   ),
                   1 => 
                   array (

@@ -261,7 +261,7 @@
                 html += "        <td style = 'width: 55%;text-align: left;' > " + list['title'] + " </td>";
                 html += "        <td style = 'width: 20%; text-align: right;white-space: nowrap;' colspan = '3' >";
                 html += "        <div class = 'btn btn-primary' title = 'Send' name = 'send_survey_button' currnet-date-data-value = '" + list['current_date'] + "' survey-id-data-value = '" + list['id'] + "' >";
-                html += "        <i class = 'fa fa-envelope' > </i>&nbsp;Send</div> ";
+                html += "        <i class = 'sicon sicon-email' > </i>&nbsp;Send</div> ";
                 html += "        <div class = 'btn' title = 'Send Later' name = 'send_later_button' send-later-data-value = '" + list['id'] + "' >";
                 html += "        <i class = 'fa fa-clock-o' > </i>&nbsp;Send Later</div > ";
                 html += "        <div class = 'btn' title = 'Preview Email-Template' name = 'preview_emailTemplate' preview-data-value = '" + list['id'] + "' >";

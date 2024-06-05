@@ -18,16 +18,16 @@
     {{/if}}
     <div class="btn-toolbar prevent-mousedown" style="display:flex;">
         <div class="btn-group" data-toggle="buttons-checkbox">
-            <button type="button" class="{{#if primary_address}}active {{/if}}is_primary btn btn-edit" data-emailproperty="primary_address" rel="tooltip" title="{{str "LBL_EMAIL_PRIMARY"}}"><i class="fa fa-star"></i></button>
-            <button type="button" class="{{#if opt_out}}active {{/if}}btn btn-edit" data-emailproperty="opt_out" rel="tooltip" title="{{str "LBL_EMAIL_OPT_OUT"}}" style="pointer-events:none;" disabled><i class="fa fa-ban"></i></button>
+            <button type="button" class="{{#if primary_address}}active {{/if}}is_primary btn btn-edit" data-emailproperty="primary_address" rel="tooltip" title="{{str "LBL_EMAIL_PRIMARY"}}"><i class="sicon sicon-star-fill"></i></button>
+            <button type="button" class="{{#if opt_out}}active {{/if}}btn btn-edit" data-emailproperty="opt_out" rel="tooltip" title="{{str "LBL_EMAIL_OPT_OUT"}}" style="pointer-events:none;" disabled><i class="sicon sicon-ban"></i></button>
             {{#if opt_out}}
-            <button type="button" class="{{#if opt_out}}active {{/if}}btn btn-edit" rel="tooltip" data-emailproperty="invalid_email" title="{{str "LBL_EMAIL_INVALID"}}" style="pointer-events:none;" disabled><i class="fa fa-exclamation-circle"></i></button><label style="color:red;padding-left:5px;">Correo registrado en REUS</label>
+            <button type="button" class="{{#if opt_out}}active {{/if}}btn btn-edit" rel="tooltip" data-emailproperty="invalid_email" title="{{str "LBL_EMAIL_INVALID"}}" style="pointer-events:none;" disabled><i class="sicon sicon-warning-circle"></i></button><label style="color:red;padding-left:5px;">Correo registrado en REUS</label>
             {{else}}
-            <button type="button" class="{{#if opt_out}}active {{/if}}btn btn-edit" rel="tooltip" data-emailproperty="invalid_email" title="{{str "LBL_EMAIL_INVALID"}}" style="pointer-events:none;" disabled><i class="fa fa-exclamation-circle"></i></button>
+            <button type="button" class="{{#if opt_out}}active {{/if}}btn btn-edit" rel="tooltip" data-emailproperty="invalid_email" title="{{str "LBL_EMAIL_INVALID"}}" style="pointer-events:none;" disabled><i class="sicon sicon-warning-circle"></i></button>
             {{/if}}   
         </div>
         <div class="btn-group prevent-mousedown">
-            <a href="javascript:void(0)" class="btn removeEmail" rel="tooltip" title="{{str "LBL_REMOVE"}}"><i class="fa fa-minus"></i></a>
+            <a href="javascript:void(0)" class="btn removeEmail" rel="tooltip" title="{{str "LBL_REMOVE"}}"><i class="sicon sicon-minus"></i></a>
         </div>
     </div>
 </div>
