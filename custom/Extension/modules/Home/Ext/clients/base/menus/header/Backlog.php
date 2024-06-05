@@ -13,5 +13,5 @@ $viewdefs['Home']['base']['menu']['header'][] = array(
      *Modificación para habilitar íconos en versión 7.9.3
      * Salvador Lopez Balleza <salvador.lopez@tactos.com.mx
      * */
-    'icon' => 'fa-user',
+    'icon' => 'sicon-user',
 );

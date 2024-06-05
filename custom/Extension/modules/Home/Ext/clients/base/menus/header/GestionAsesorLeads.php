@@ -7,5 +7,5 @@ $viewdefs['Home']['base']['menu']['header'][] = array(
     'route'=>'#Home/layout/GestionAsesorLeads',
     'label' =>'Gestión de asignación LM',
     'acl_module'=>'Home',
-    'icon' => 'fa-users',
+    'icon' => 'sicon-user-group',
 );

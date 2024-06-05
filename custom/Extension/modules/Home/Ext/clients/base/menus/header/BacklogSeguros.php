@@ -6,5 +6,5 @@ $viewdefs['Home']['base']['menu']['header'][] = array(
     'route'=> '#TCTBL_Backlog_Seguros',
     'label' =>'Backlog Seguros',
     'acl_module'=>'Home',
-    'icon' => 'fa-user',
+    'icon' => 'sicon-user',
 );
