@@ -65,6 +65,10 @@
             if( (App.user.get("cancelar_casos_c") == 0 || App.user.get("cancelar_casos_c") == "") && App.user.get("type") != "admin" && this.model.get('status') !="10" ){
                 
                 var lista_status = app.lang.getAppListStrings("case_status_dom");
+
+                if( this.items !== null ){
+                    lista_status = this.items;
+                }
                 
                 Object.keys(lista_status).forEach(function (key) {
                     if (key == "10") {
