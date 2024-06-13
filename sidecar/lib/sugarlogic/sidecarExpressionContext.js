@@ -1203,10 +1203,12 @@ SUGAR.forms.Dependency.prototype.fire = function(undo)
                 if (this.testOnLoad && action.afterRender) {
                     if (this.context.view.action === 'list') {
                         this.context.view.on('render', function() {
+                            /*
                             var prevModel = action.context.model;
                             action.context.setModel(model);
                             action.exec();
                             action.context.setModel(prevModel);
+                            */
                         }, action);
                     }
                 }

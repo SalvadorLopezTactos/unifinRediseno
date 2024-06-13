@@ -9119,6 +9119,7 @@ validaReqUniclickInfo: function () {
 		var url = app.api.buildURL('tct02_Resumen/' + this.model.get('id'), null, null);
 		app.api.call('read', url, {}, {
 			success: _.bind(function (resumen) {
+                contexto_cuenta.showSubpanels();
 				if(resumen.error_dynamics365_c) {
 					app.alert.show('error_otp', {
 						level: 'warning',
@@ -9129,4 +9130,9 @@ validaReqUniclickInfo: function () {
 			}, this)
 		});
 	},
+
+    showSubpanels:function(){
+
+        $("[data-subpanel-link]").show();
+    }
 })
