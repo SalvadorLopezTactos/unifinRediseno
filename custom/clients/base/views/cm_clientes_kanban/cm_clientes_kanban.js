@@ -2,7 +2,7 @@
     plugins: ['Dashlet'],
 
     events: {
-        'click .fa-star':'setFavorite',
+        'click .sicon-star-fill':'setFavorite',
         'click .sortTipo':'ordenaMontoClientes',
         'click .dropdown-field-clientes':'dropdownFieldStyleClientes',
         'click .ordenamiento_categoria':'ordenamientoPorTipoClientes'
