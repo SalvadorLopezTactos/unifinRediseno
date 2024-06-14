@@ -736,7 +736,9 @@
         if (this.model.get('show_panel_c') == true) {
             //Muestra vista 360
             //TabNav
-            $("#recordTab>li.tab").removeClass('active');
+            //$("#recordTab>li.tab").removeClass('active');
+            //Se elimina clase active de todas las pestañas
+            $("a.block").removeClass("active");
             $('li.tab.LBL_RECORDVIEW_PANEL8').addClass("active");
 
             //Tabcontent
@@ -765,6 +767,33 @@
         $("div[data-name='show_panel_c']").hide();
         // Se oculta el boton de mas opciones en las petañas de cuentas(record)
         $('.nav-tabs li a.dropdown-toggle').hide();
+    },
+
+    /**
+     * 
+     * Manda a llamar función padre de record.js
+     * Se aplica condición para quitar clase "active" al panel de vista360 ya que para ocultar o mostrar el panel se utiliza js en la función  _hideVista360
+     * Ya que al agregar dicha clase "active" siempre deja la pestaña de vista360 activa (LBL_RECORDVIEW_PANEL8)
+     */
+
+    setActiveTab: function (event) {
+        if ( !$(event.currentTarget).parent().hasClass("LBL_RECORDVIEW_PANEL8") ) {
+            //Al remover clase active, a la pestaña se le quita el color azul
+            $(".LBL_RECORDVIEW_PANEL8").removeClass("active");
+
+            //Se oculta el contenido de la pestaña de Vista 360
+            $("#tabContent>div.tab-pane").addClass("fade");
+            $("#tabContent>div.tab-pane").removeClass("active");
+
+            //Obtenemos id del contenido al que se hace referencia la pestaña
+            var idElement = $(event.currentTarget)[0].href.split("#")[1];
+            //Clase active agrega espacio para mostrar contenido
+            $("#"+idElement).addClass("active");
+            //Al remover clase fade, se muestra el contenido de la pestaña correspondiente
+            $("#"+idElement).removeClass("fade");
+            
+        }
+        this._super('setActiveTab', [event]);
     },
 
 
