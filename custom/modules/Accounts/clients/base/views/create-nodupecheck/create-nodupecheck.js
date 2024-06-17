@@ -792,7 +792,7 @@
         // var SegundoNombre = this.model.get('segundonombre_c');
         // var ApellidoP = this.model.get('apellidopaterno_c');
         // var ApellidoM = this.model.get('apellidomaterno_c');
-        var Nombre = this.model.get('name');
+        var Nombre = this.model.get("name").toString();
         var c = 0;
         /*@Jesus Carrillo*/
         //var fields2=[PrimerNombre.trim(),SegundoNombre.trim(),ApellidoP.trim(),ApellidoM.trim()]
@@ -1803,7 +1803,7 @@
         if(_.isEmpty(errors)){
             //Recupera variables
             var postData = {
-                'name': this.model.get("name")
+                'name': this.model.get("name").toString()
             };
             //Consume servicio
             if(this.model.get("name").trim()!='') {
@@ -1868,7 +1868,7 @@
             
             //Parámetros para consumir servicio
             var params = {
-                'nombre': this.model.get('name'),
+                'nombre': this.model.get('name').toString(),
                 'correo': email,
                 'telefonos': telefonos,
                 'rfc': rfc,
