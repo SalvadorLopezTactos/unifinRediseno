@@ -3421,7 +3421,7 @@
                                 autoClose: false,
 
                                 onConfirm: function () {
-                                    self.model.set("rfc_c", rfc_local);
+                                    contexto_cuenta.model.set("rfc_c", rfc_local);
                                 },
                                 onCancel: function () {
                                     //alert("Cancelled!");
