@@ -217,9 +217,9 @@ class Task_Hooks
 
         $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b></b>
 	  <br>Se le informa que se ha actualizado la siguiente información en el registro de la <a id="linkTarea" href="'. $linkTarea.'">Tarea</a>:
-	  <br><br>'.$string_modificados.'
+	  <br><br>'.$string_modificados. '
       <br><br>Atentamente Unifin
-      <br><p class="imagen"><img border="0" id="bannerUnifin" src="https://www.unifin.com.mx/blog/wp-content/uploads/2021/01/UNIFIN_centrado_Poder2.png"></span></p>
+      <br><p class="imagen"><img border="0" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
       <p class="MsoNormal"><span style="font-size:8.5pt;color:#757b80">______________________________<wbr>______________<u></u><u></u></span></p>
       <p class="MsoNormal" style="text-align: justify;"><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
        Este correo electrónico y sus anexos pueden contener información CONFIDENCIAL para uso exclusivo de su destinatario. Si ha recibido este correo por error, por favor, notifíquelo al remitente y bórrelo de su sistema.
