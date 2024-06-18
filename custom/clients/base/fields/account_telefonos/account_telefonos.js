@@ -86,9 +86,6 @@
             this.newArray = [];
         }
 
-        //Agrega estilo para mostrar correctamente el icono de whatsApp
-        $(".whatsapp-tel").removeAttr("style");
-        $(".whatsapp-tel").attr("style", "margin: 15px 37px");
     },
 
     keyDownNewExtension: function (evt) {
