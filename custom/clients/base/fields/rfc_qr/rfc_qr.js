@@ -168,7 +168,7 @@
       		});
       		return;
     	}
-		if(contexto_cuenta.picturecam == false){
+		if(contexto_cuenta.picturecam == false || self.picturecam == false){
 			if(file=="" || file==undefined){
 				app.alert.show('errorAlert', {
 					level: 'error',
