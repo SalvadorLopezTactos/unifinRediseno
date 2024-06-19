@@ -104,6 +104,10 @@
 			text-align: center;
 		}
 
+		.centerContent {
+			text-align: center;
+		}
+
 		.pointer {cursor: pointer;}
     </style>
 
@@ -184,7 +188,7 @@
 				</tr>
 				{{#each cuentas}}
                 <tr class='single'>
-                    <td>
+                    <td class="centerContent">
                     <span sfuuid='880' class='list'>
                           <div class='ellipsis_inline' data-placement='bottom'>
                             <span class="btn ConsultarAudit sicon sicon-list" title="Consultar Datos Históricos" data-id="{{id}}" value="{{id}}"></span>
@@ -192,42 +196,42 @@
                           </div>
                     </span>
                     </td>
-                    <td>
+                    <td class="centerContent">
                     <span sfuuid='880' class='list'>
                           <div class='ellipsis_inline' data-placement='bottom'>
                             <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'><input type="checkbox" name="selected1" value="{{id}}" class="selected" {{#if tct_no_contactar_chk_c}}checked{{/if}} {{#if ../this.tct_no_contactar_chk_c}}disabled{{/if}}/></span>
                           </div>
                     </span>
                     </td>
-                    <td>
+                    <td class="centerContent">
                     <span sfuuid='880' class='list'>
                           <div class='ellipsis_inline' data-placement='bottom'>
                             <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'><input type="checkbox" name="selected2" value="{{id}}" class="selected" {{#if bloqueo_credito_c}}checked{{/if}} {{#if ../this.bloqueo_credito_c}}disabled{{/if}}/></span>
                           </div>
                     </span>
                     </td>
-                    <td>
+                    <td class="centerContent">
                     <span sfuuid='880' class='list'>
                           <div class='ellipsis_inline' data-placement='bottom'>
                             <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'><input type="checkbox" name="selected3" value="{{id}}" class="selected" {{#if bloqueo_cumple_c}}checked{{/if}} {{#if ../this.bloqueo_cumple_c}}disabled{{/if}}/></span>
                           </div>
                     </span>
                     </td>
-                    <td>
+                    <td class="centerContent">
                     <span sfuuid='880' class='list'>
                         <div class='ellipsis_inline' data-placement='bottom'>
                             <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{getUnifinListValue 'tipo_registro_cuenta_list' tipo_registro_cuenta_c}}</span>
                         </div>
                     </span>
                     </td>
-                    <td>
+                    <td class="centerContent">
                     <span sfuuid='880' class='list'>
                           <div class='ellipsis_inline' data-placement='bottom'>
                               <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'><a href="#Accounts/{{id}}" target="_blank">{{name}}</a></span>
                           </div>
                     </span>
                     </td>
-                    <td>
+                    <td class="centerContent">
                     <span sfuuid='880' class='list'>
                         <div class='ellipsis_inline' data-placement='bottom'>
                             <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{idcliente_c}}</span>
