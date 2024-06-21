@@ -5,45 +5,74 @@
  */
 -->
 <!-- Campo para desplegar Objetivos en minuta:Edición -->
-<div style="border: 2px solid #055993;border-radius: 12px;padding:10px;">
+<style>
+  .table-container {
+    border: 2px solid #055993;
+    border-radius: 12px;
+    padding: 10px;
+    overflow-x: auto;
+    /* Agregar scroll horizontal si es necesario */
+  }
+
+  .table {
+    width: 100%;
+    margin: 0;
+    /* Elimina los márgenes adicionales */
+  }
+
+  .table th,
+  .table td {
+    padding: 8px;
+    /* Asegúrate de que los paddings estén uniformes */
+    box-sizing: border-box;
+    /* Para incluir paddings y borders en el tamaño total */
+  }
+
+  .table thead th {
+    background-color: #0679c8;
+    color: #fff;
+  }
+</style>
+
+<div class="table-container">
   <!-- Table list-->
   <div class="list-view">
-    <table id="tableResult" class="table table-striped span12">
-        <thead>
-            <tr bgcolor="#0679c8" style="color:#fff">
-                <th width="10%" style="background-color:#0679c8;color:#fff;padding:8px">&nbsp;</th>
-                <th width="80%" style="background-color:#0679c8;color:#fff;padding:8px">Objetivo</th>
-                <th width="10%" style="text-align:center;background-color:#0679c8;color:#fff;padding:8px">Cumplimiento</th>
-            </tr>
-        </thead>
-        <tbody>
-          {{#each myobjmin.records}}
-            <tr>
-                <td>
-                    {{#if description}}
-                        <button class="btn btn-success">Específico</button>
-                    {{else}}
-                        <button class="btn btn-primary">&nbsp;&nbsp;General&nbsp;&nbsp;</button>
-                    {{/if}}
-                </td>
-                <td class="objetivoSelect">
-                  {{name}}
-                </td>
-                <td class="CheckAction" style="text-align:center" >
-
-                  <button type="button"  class="updateRecord" style="border-width:0;background-color: rgba(255,255,255,0.15);">
-                    {{#if cumplimiento}}
-                      <i class="sicon sicon-check" style="color: #04ff00; font-size:20px"></i>
-                    {{else}}
-                      <i class="sicon sicon-check" style="font-size:20px"></i>
-                    {{/if}}
-                  </button>
-                </td>
-            </tr>
-          {{/each}}
-        </tbody>
+    <table id="tableResult" class="table table-striped">
+      <thead>
+        <tr>
+          <th width="10%">&nbsp;</th>
+          <th width="80%">Objetivo</th>
+          <th width="10%" style="text-align:center">Cumplimiento</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each myobjmin.records}}
+        <tr>
+          <td>
+            {{#if description}}
+            <button class="btn btn-success">Específico</button>
+            {{else}}
+            <button class="btn btn-primary">&nbsp;&nbsp;General&nbsp;&nbsp;</button>
+            {{/if}}
+          </td>
+          <td class="objetivoSelect">
+            {{name}}
+          </td>
+          <td class="CheckAction" style="text-align:center">
+            <button type="button" class="updateRecord" style="border-width:0;background-color: rgba(255,255,255,0.15);">
+              {{#if cumplimiento}}
+              <i class="sicon sicon-check" style="color: #04ff00; font-size:20px"></i>
+              {{else}}
+              <i class="sicon sicon-check" style="font-size:20px"></i>
+              {{/if}}
+            </button>
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
     </table>
   </div>
 </div>
+
 
 {{#unless hideHelp}}{{#if def.help}}<p class="help-block">{{str def.help module}}</p>{{/if}}{{/unless}}
