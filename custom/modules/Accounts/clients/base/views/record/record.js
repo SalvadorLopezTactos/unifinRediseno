@@ -9163,5 +9163,7 @@ validaReqUniclickInfo: function () {
     showSubpanels:function(){
 
         $("[data-subpanel-link]").show();
+
+         $('[data-name="control_dynamics_365_c"]').hide();
     }
 })
