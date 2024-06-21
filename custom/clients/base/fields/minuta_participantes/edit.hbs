@@ -7,14 +7,14 @@
 <div style="border: 2px solid #055993;border-radius: 12px;padding:10px;">
   <!-- Tabla de asistentes-->
   <div class="list-view">
-    <table id="tableParticipantes" class="table table-striped">
+    <table id="tableParticipantes" class="table table-striped span12" style="margin-bottom:30px">
         <thead>
             <tr bgcolor="#0679c8" style="color:#fff">
-                <th width="10%">&nbsp;</th>
-                <th width="30%">Participante</th>
-                <th width="30%">Correo</th>
-                <th width="20%">Teléfono</th>
-                <th width="10%">Asistencia</th>
+                <th width="10%" style="background-color:#0679c8;color:#fff;padding:8px">&nbsp;</th>
+                <th width="30%" style="background-color:#0679c8;color:#fff;padding:8px">Participante</th>
+                <th width="30%" style="background-color:#0679c8;color:#fff;padding:8px">Correo</th>
+                <th width="20%" style="background-color:#0679c8;color:#fff;padding:8px">Teléfono</th>
+                <th width="10%" style="background-color:#0679c8;color:#fff;padding:8px">Asistencia</th>
             </tr>
         </thead>
         <tbody>
@@ -47,9 +47,9 @@
                 <td class="CheckActionP" style="text-align:center" >
                     <button type="button" {{#if activo}}class="updateAsistencia" {{/if}} style="border-width:0;background-color: rgba(255,255,255,0.15);">
                     {{#if asistencia}}
-                      <i class="fa fa-check" style="color: #04ff00; font-size:20px"></i>
+                      <i class="sicon sicon-check" style="color: #04ff00; font-size:20px"></i>
                     {{else}}
-                      <i class="fa fa-check" style="font-size:20px"></i>
+                      <i class="sicon sicon-check" style="font-size:20px"></i>
                     {{/if}}
                   </button>
                 </td>
@@ -97,7 +97,7 @@
       <!-- Guardar btn -->
       <div class="span1">
         <a class="btn addParticipante">
-          <i class="fa fa-plus"></i>
+          <i class="sicon sicon-plus"></i>
         </a>
       </div>
     </div>
@@ -119,7 +119,7 @@
 		  <!-- Guardar btn -->
 		  <div class="span1">
 			<a class="btn addParticipantes">
-			  <i class="fa fa-plus"></i>
+			  <i class="sicon sicon-plus"></i>
 			</a>
 		  </div>
       </div>

@@ -5,12 +5,36 @@
  */
 -->
 <!-- Campo para desplegar Objetivos en minuta: Detalle -->
-<div style="border: 2px solid #055993;border-radius: 12px;padding:10px;">
+<style>
+  .table-container {
+    border: 2px solid #055993;
+    border-radius: 12px;
+    padding: 10px;
+    overflow-x: auto; /* Agregar scroll horizontal si es necesario */
+  }
+  
+  .table {
+    width: 100%;
+    margin: 0; /* Elimina los márgenes adicionales */
+  }
+
+  .table th, .table td {
+    padding: 8px; /* Asegúrate de que los paddings estén uniformes */
+    box-sizing: border-box; /* Para incluir paddings y borders en el tamaño total */
+  }
+  
+  .table thead th {
+    background-color: #0679c8;
+    color: #fff;
+  }
+</style>
+
+<div class="table-container">
   <!-- Table list-->
   <div class="list-view">
     <table id="tableResult" class="table table-striped">
         <thead>
-            <tr bgcolor="#0679c8" style="color:#fff">
+            <tr>
                 <th width="10%">&nbsp;</th>
                 <th width="80%">Objetivo</th>
                 <th width="10%" style="text-align:center">Cumplimiento</th>
@@ -31,9 +55,9 @@
                 </td>
                 <td class="CheckAction" style="text-align:center">
                   {{#if tct_cumplimiento_chk}}
-                    <i class="fa fa-check" style="color: #04ff00; font-size:20px"></i>
+                    <i class="sicon sicon-check" style="color: #04ff00; font-size:20px"></i>
                   {{else}}
-                    <i class="fa fa-check" style="font-size:20px"></i>
+                    <i class="sicon sicon-check" style="font-size:20px"></i>
                   {{/if}}
                 </td>
             </tr>
@@ -42,5 +66,4 @@
     </table>
   </div>
 </div>
-
 {{#unless hideHelp}}{{#if def.help}}<p class="help-block">{{str def.help module}}</p>{{/if}}{{/unless}}
