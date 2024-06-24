@@ -9165,5 +9165,20 @@ validaReqUniclickInfo: function () {
         $("[data-subpanel-link]").show();
 
          $('[data-name="control_dynamics_365_c"]').hide();
+
+         //Se agrega parche para mostrar icono de + en subpanels de Venta cruzada y Seguros ya que desde panel-top no se está tomando
+        $('[data-subpanel-link="accounts_ref_venta_cruzada_1"]')
+            .find(".fa-plus")
+            .addClass("sicon sicon-plus")
+            .removeClass("fa")
+            .removeClass("fa-plus");
+
+        $('[data-subpanel-link="s_seguros_accounts"]')
+          .find(".fa-plus")
+          .addClass("sicon sicon-plus")
+          .removeClass("fa")
+          .removeClass("fa-plus");
+
+
     }
 })
