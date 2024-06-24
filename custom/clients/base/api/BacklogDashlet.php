@@ -284,7 +284,7 @@ SQL;
         $query = <<<SQL
 SELECT lb.*,blcs.*,IFNULL(blcs.monto_final_comprometido_c,0) AS monto_final_comprometido, IFNULL(blcs.ri_final_comprometida_c,0) AS ri_final_comprometida,
 a.name AS account_name, CONCAT(u.first_name, " " , u.last_name) AS promotor, lb.equipo AS equipo_c, o.id AS oportunityId,
-case when lb.description = '' then 'fa-comment-o' when lb.description is null then 'fa-comment-o' else 'fa-comment' end as comentado,
+case when lb.description = '' then 'sicon-comment-line-xl' when lb.description is null then 'sicon-comment-line-xl' else 'sicon-comment-lg' end as comentado,
 case when blcs.estatus_operacion_c = '1' then '#FF6666' when blcs.estatus_operacion_c = '2' and (blcs.estado_cancelacion_c is null or blcs.estado_cancelacion_c = '3') then '#E5FFCC'
 when blcs.estatus_operacion_c = '2' and blcs.estado_cancelacion_c = '1' then '#F6D96F' else '#FFFFFF' end as color,
 case lb.equipo when '1' then 1 when '2' then 2 when '3' then 3 when '4' then 4 when '5' then 5 when '6' then 6 when '7' then 7 when '8' then 8 when '9' then 9
