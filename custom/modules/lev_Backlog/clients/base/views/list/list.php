@@ -34,48 +34,48 @@ array (
               ),
               2 => 
               array (
-                'name' => 'estatus_operacion_c',
-                'label' => 'LBL_ESTATUS_OPERACION_C',
-                'enabled' => true,
-                'default' => true,
-              ),
-              3 => 
-              array (
-                'name' => 'progreso',
-                'label' => 'LBL_PROGRESO',
-                'enabled' => true,
-                'default' => true,
-              ),
-              4 => 
-              array (
-                'name' => 'mes',
-                'label' => 'LBL_MES',
-                'enabled' => true,
-                'default' => true,
-              ),
-              5 => 
-              array (
                 'name' => 'producto_c',
                 'label' => 'LBL_PRODUCTO_C',
                 'enabled' => true,
                 'readonly' => false,
                 'default' => true,
               ),
-              6 => 
+              3 => 
               array (
-                'name' => 'rango_bl_c',
-                'label' => 'LBL_RANGO_BL',
+                'name' => 'estatus_operacion_c',
+                'label' => 'LBL_ESTATUS_OPERACION_C',
                 'enabled' => true,
-                'readonly' => false,
                 'default' => true,
               ),
-              7 => 
+              4 => 
+              array (
+                'name' => 'progreso',
+                'label' => 'LBL_PROGRESO',
+                'enabled' => true,
+                'default' => true,
+              ),
+              5 => 
               array (
                 'label' => 'LBL_DATE_MODIFIED',
                 'enabled' => true,
                 'default' => true,
                 'name' => 'date_modified',
                 'readonly' => true,
+              ),
+              6 => 
+              array (
+                'name' => 'mes',
+                'label' => 'LBL_MES',
+                'enabled' => true,
+                'default' => false,
+              ),
+              7 => 
+              array (
+                'name' => 'rango_bl_c',
+                'label' => 'LBL_RANGO_BL',
+                'enabled' => true,
+                'readonly' => false,
+                'default' => false,
               ),
               8 => 
               array (
