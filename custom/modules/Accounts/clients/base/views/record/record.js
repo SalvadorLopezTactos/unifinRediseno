@@ -9179,6 +9179,28 @@ validaReqUniclickInfo: function () {
           .removeClass("fa")
           .removeClass("fa-plus");
 
+          //Se refrescan los subpaneles manualmente para evitar bug al aplicar refresh a la página, los subpaneles no mostraban datos
+          this.refreshAllSubpanels();
 
+
+    },
+
+    refreshAllSubpanels: function() {
+
+        var arrSubpaneles = [];
+
+        $('[data-subpanel-link]').each(function() {
+            var subpanelLink = $(this).data('subpanel-link');
+            arrSubpaneles.push(subpanelLink);
+        });
+        _.each(this.model._relatedCollections, function(collection){
+
+            if( arrSubpaneles.includes(collection.link.name) ){
+                collection.fetch({relate: true});
+            }
+            
+        });
     }
+
+
 })
