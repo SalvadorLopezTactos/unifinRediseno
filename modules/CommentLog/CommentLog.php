@@ -111,7 +111,7 @@ class CommentLog extends Basic
         // No ids means nothing to do
         // Not use this in CommentLog module, use only for other modules
         if (empty($ids) || ($focus == null) || ($focus->table_name === 'commentlog')) {
-            return [];
+            return array();
         }
 
         $query = new SugarQuery($this->db);
@@ -121,7 +121,7 @@ class CommentLog extends Basic
         $query->where()->in('record_id', $ids);
         $results = $query->execute();
 
-        $returnArray = [];
+        $returnArray = array();
         foreach ($results as $result) {
             $returnArray[] = $result['commentlog_id'];
         }
@@ -165,7 +165,7 @@ class CommentLog extends Basic
         // Now loop over the parent fields and if any of them are not in the result
         // return false
         foreach ($this->parentFields as $field) {
-            $verify = $field['alias'] ?? $field['field'];
+            $verify = isset($field['alias']) ? $field['alias'] : $field['field'];
             if (!isset($row[$verify])) {
                 return false;
             }
@@ -302,7 +302,7 @@ class CommentLog extends Basic
     {
         $constraint = new Guid();
         $violations = Validator::getService()->validate($guid, $constraint);
-        return !(safeCount($violations) > 0);
+        return !(count($violations) > 0);
     }
 
     /**
@@ -423,9 +423,24 @@ class CommentLog extends Basic
     {
         $currentUser = $this->getCurrentUser();
         $initiatorName = $currentUser->full_name;
-        $mailTransmissionProtocol = 'unknown';
+        $mailTransmissionProtocol = "unknown";
         $record = $this->getBean($moduleName, $recordId);
         $recordName = $record->name;
+        $description="";
+
+        $record->load_relationship('commentlog_link');
+        if ($record->commentlog_link){
+            $commentlog_beans = $record->commentlog_link->getBeans(array('orderby' => 'date_entered ASC'));
+            $commentlogs = array();
+
+            foreach ($commentlog_beans as $commentlog_bean) {
+
+                $description=$commentlog_bean->entry;
+                //Limpiando cadea para dejar únicamente el comentario y quitar la mención
+                //La cadena viene: @[Users:c57e811e-b81a-cde4-d6b4-5626c9961772] Comentario
+                $description=str_replace("@[Users:".$user->id."]","",$description);
+            }
+        }
 
         try {
             $mailer = $this->getSystemMailer();
@@ -454,11 +469,15 @@ class CommentLog extends Basic
                 strtolower($singularModuleName),
                 $emailTemplate->subject
             );
+
+            $emailTemplate->body_html = str_replace('$user_mention',$user->full_name, $emailTemplate->body_html);
             $emailTemplate->body_html = str_replace('$record_name', $recordName, $emailTemplate->body_html);
             $emailTemplate->body_html = str_replace('$record_url', $recordUrl, $emailTemplate->body_html);
+            $emailTemplate->body_html = str_replace('$description', $description, $emailTemplate->body_html);
 
             $emailTemplate->body = str_replace('$record_name', $recordName, $emailTemplate->body);
             $emailTemplate->body = str_replace('$record_url', $recordUrl, $emailTemplate->body);
+            $emailTemplate->body = str_replace('$description', $description, $emailTemplate->body);
 
             // add the recipient...
             $mailer->addRecipientsTo(new EmailIdentity($user->email1, $user->full_name));
@@ -473,7 +492,7 @@ class CommentLog extends Basic
             $mailer->send();
         } catch (MailerException $me) {
             $message = $me->getMessage();
-            $GLOBALS['log']->warn(
+            $GLOBALS["log"]->warn(
                 "Notifications: error sending e-mail (method: {$mailTransmissionProtocol}), (error: {$message})"
             );
         }
