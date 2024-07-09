@@ -30,17 +30,25 @@
              * @param {string} module Module to which the icon belongs.
              */
             getModuleIconLabel: function(module) {
-                var name = app.lang.getAppListStrings('moduleIconList')[module] ||
-                        app.lang.getModuleName(module);
-                var space = name.indexOf(' ');
-                var hasSpace = space !== -1;
+                //Ajuste para evitar error al mostrar nuevas opciones en menú principal (Quantico, Cotizador, etc)
                 var result;
+                if(module == undefined){
+                    result = "";
+                }else{
+                    var name = app.lang.getAppListStrings("moduleIconList")[module] || app.lang.getModuleName(module);
+                    var space = name.indexOf(" ");
+                    var hasSpace = space !== -1;
+                    var result;
 
-                if (hasSpace) {
-                    result = name.substring(0, 1) + name.substring(space + 1, space + 2);
-                } else {
-                    result = name.substring(0, 2);
+                    if (hasSpace) {
+                      result =
+                        name.substring(0, 1) +
+                        name.substring(space + 1, space + 2);
+                    } else {
+                      result = name.substring(0, 2);
+                    }
                 }
+                
 
                 return result;
             }

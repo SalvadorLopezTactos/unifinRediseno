@@ -76,7 +76,8 @@ $viewdefs['base']['layout']['sidebar-nav'] = [
                             'abbreviation' => 'Qu',
                             'label' => 'Quantico',
                             'secondary_action' => true,
-                            'route' => 'bwc/index.php?entryPoint=ListaTareasQuantico&idActiveDirectory=' . $current_user->id_active_directory_c,
+                            //'route' => 'bwc/index.php?entryPoint=ListaTareasQuantico&idActiveDirectory=' . $current_user->id_active_directory_c,
+                            'route' => 'bwc/index.php?entryPoint=ListaTareasQuantico&idActiveDirectory=AD_REPLACE',
                             'template' => 'sidebar-nav-item',
                             'flyoutComponents' => [
                                 // [
@@ -88,7 +89,8 @@ $viewdefs['base']['layout']['sidebar-nav'] = [
                                         'type' => 'sidebar-nav-flyout-actions',
                                         'actions' => [
                                             [
-                                                'route' => '#bwc/index.php?entryPoint=ListaTareasQuantico&idActiveDirectory='.$current_user->id_active_directory_c,
+                                                //'route' => '#bwc/index.php?entryPoint=ListaTareasQuantico&idActiveDirectory='.$current_user->id_active_directory_c,
+                                                'route' => '#bwc/index.php?entryPoint=ListaTareasQuantico&idActiveDirectory=AD_REPLACE',
                                                 'label' => 'Lista de Tareas',
                                                 'icon' => 'sicon-data-table',
                                             ],
@@ -100,7 +102,8 @@ $viewdefs['base']['layout']['sidebar-nav'] = [
                                         'type' => 'sidebar-nav-flyout-actions',
                                         'actions' => [
                                             [
-                                                'route' => '#bwc/index.php?entryPoint=operacionesCRM&idActiveDirectory=' . $current_user->id_active_directory_c,
+                                                //'route' => '#bwc/index.php?entryPoint=operacionesCRM&idActiveDirectory=' . $current_user->id_active_directory_c,
+                                                'route' => '#bwc/index.php?entryPoint=operacionesCRM&idActiveDirectory=AD_REPLACE',
                                                 'label' => 'Gestión de firmas',
                                                 'icon' => 'sicon-data-table',
                                             ],
@@ -112,7 +115,8 @@ $viewdefs['base']['layout']['sidebar-nav'] = [
                                         'type' => 'sidebar-nav-flyout-actions',
                                         'actions' => [
                                             [
-                                                'route' => '#bwc/index.php?entryPoint=CotizadorQuantico&idActiveDirectory=' . $current_user->id_active_directory_c,
+                                                //'route' => '#bwc/index.php?entryPoint=CotizadorQuantico&idActiveDirectory=' . $current_user->id_active_directory_c,
+                                                'route' => '#bwc/index.php?entryPoint=CotizadorQuantico&idActiveDirectory=AD_REPLACE',
                                                 'label' => 'Cotizador Quantico',
                                                 'icon' => 'sicon-data-table',
                                             ],
@@ -124,7 +128,8 @@ $viewdefs['base']['layout']['sidebar-nav'] = [
                                         'type' => 'sidebar-nav-flyout-actions',
                                         'actions' => [
                                             [
-                                                'route' => '#bwc/index.php?entryPoint=HistorialCotizador&idActiveDirectory=' . $current_user->id_active_directory_c,
+                                                //'route' => '#bwc/index.php?entryPoint=HistorialCotizador&idActiveDirectory=' . $current_user->id_active_directory_c,
+                                                'route' => '#bwc/index.php?entryPoint=HistorialCotizador&idActiveDirectory=AD_REPLACE',
                                                 'label' => 'Historial de cotizaciones',
                                                 'icon' => 'sicon-data-table',
                                             ],
@@ -136,7 +141,8 @@ $viewdefs['base']['layout']['sidebar-nav'] = [
                                         'type' => 'sidebar-nav-flyout-actions',
                                         'actions' => [
                                             [
-                                                'route' => '#bwc/index.php?entryPoint=OpMasivasRsQuantico&idActiveDirectory=' . $current_user->id_active_directory_c,
+                                                //'route' => '#bwc/index.php?entryPoint=OpMasivasRsQuantico&idActiveDirectory=' . $current_user->id_active_directory_c,
+                                                'route' => '#bwc/index.php?entryPoint=OpMasivasRsQuantico&idActiveDirectory=AD_REPLACE',
                                                 'label' => 'Operaciones Masivas Rs',
                                                 'icon' => 'sicon-data-table',
                                             ],
