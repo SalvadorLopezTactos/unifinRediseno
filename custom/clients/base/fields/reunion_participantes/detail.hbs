@@ -4,18 +4,40 @@
  *  CustomField - Participantes
  */
 -->
+<style>
+  .table-container {
+    border: 2px solid #055993;
+    border-radius: 12px;
+    padding: 10px;
+    overflow-x: auto; /* Agregar scroll horizontal si es necesario */
+  }
+  
+  .table {
+    width: 100%;
+    margin: 0; /* Elimina los márgenes adicionales */
+  }
+  .table th, .table td {
+    padding: 8px; /* Asegúrate de que los paddings estén uniformes */
+    box-sizing: border-box; /* Para incluir paddings y borders en el tamaño total */
+  }
+  
+  .table thead th {
+    background-color: #0679c8;
+    color: #fff;
+  }
+</style>
 <div style="border: 2px solid #055993;border-radius: 12px;padding:10px;">
   <!-- Table list-->
   <div class="list-view">
-    <table id="tableParticipantes" class="table table-striped">
+    <table id="tableParticipantes" class="table table-striped span12">
         <thead>
-            <tr bgcolor="#0679c8" style="color:#fff">
-                <th width="10%">&nbsp;</th>
-				<th width="10%">Invitar</th>
-                <th width="25%">Participante</th>
-                <th width="25%">Correo</th>
-                <th width="20%">Teléfono</th>
-                <th width="10%">Asistencia</th>
+            <tr>
+              <th width="10%">&nbsp;</th>
+              <th width="10%">Invitar</th>
+              <th width="25%">Participante</th>
+              <th width="25%">Correo</th>
+              <th width="20%">Teléfono</th>
+              <th width="10%">Asistencia</th>
             </tr>
         </thead>
         <tbody>
@@ -30,9 +52,9 @@
                 </td>
                 <td class="CheckActionP" style="text-align:center" >
                   {{#if activo}}
-                    <i class="fa fa-check" style="color: #04ff00; font-size:20px"></i>
+                    <i class="sicon sicon-check" style="color: #04ff00; font-size:20px"></i>
                   {{else}}
-                    <i class="fa fa-check" style="font-size:20px"></i>
+                    <i class="sicon sicon-check" style="font-size:20px"></i>
                   {{/if}}
                 </td>
                 <td class="campo1SelectP">
@@ -46,9 +68,9 @@
                 </td>
                 <td class="CheckActionP" style="text-align:center" >
                   {{#if asistencia}}
-                    <i class="fa fa-check" style="color: #04ff00; font-size:20px"></i>
+                    <i class="sicon sicon-check" style="color: #04ff00; font-size:20px"></i>
                   {{else}}
-                    <i class="fa fa-check" style="font-size:20px"></i>
+                    <i class="sicon sicon-check" style="font-size:20px"></i>
                   {{/if}}
                 </td>
             </tr>
