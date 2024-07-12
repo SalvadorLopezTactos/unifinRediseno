@@ -709,8 +709,14 @@
          }
         this.model.fields['tipo_registro_cuenta_c'].options = new_options;
         if(Object.keys(new_options).length == 1 && new_options[""]==""){
-            alert("No es posible crear Cuentas");
-            this.model.set("tipo_registro_cuenta_c","");
+            app.alert.show('alertNoCreaCuenta', {
+                level: 'error',
+                messages: 'No tienes permisos para crear Cuentas, para hacerlo, favor de crear un registro de Lead',
+                autoClose: false
+            });
+            app.drawer.close();
+            //No tienes permisos para crear Cuentas, para hacerlo, favor de crear un registro de Lead
+            //this.model.set("tipo_registro_cuenta_c","");
         }
 
         //this.model.on('change:name', this.cleanName, this);
