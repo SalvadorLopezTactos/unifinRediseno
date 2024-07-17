@@ -167,9 +167,10 @@ SQL;
         if( $responseBloqueo['bloqueo'] == 'SI' ){
             
             $tipos_bloqueo = $responseBloqueo['tipo'];
-            require_once 'include/api/SugarApiException.php';
-            throw new SugarApiExceptionInvalidParameter("El registro no se puede guardar ya que la cuenta relacionada se encuentra bloqueada por: ". implode(',',$tipos_bloqueo) );
-            
+            //require_once 'include/api/SugarApiException.php';
+            require_once 'custom/include/api/CstmException.php';
+            //throw new SugarApiExceptionInvalidParameter("El registro no se puede guardar ya que la cuenta relacionada se encuentra bloqueada por: ". implode(',',$tipos_bloqueo) );
+            throw new CstmException("El registro no se puede guardar ya que la cuenta relacionada se encuentra bloqueada por: ". implode(',',$tipos_bloqueo) );
         }
 
 		$id_cuenta_relacionada = $bean->account_id1_c;
@@ -181,8 +182,10 @@ SQL;
         if( $responseBloqueoRel['bloqueo'] == 'SI' ){
             
             $tipos_bloqueo_rel = $responseBloqueoRel['tipo'];
-            require_once 'include/api/SugarApiException.php';
-            throw new SugarApiExceptionInvalidParameter("El registro no se puede guardar ya que la cuenta relacionada se encuentra bloqueada por: ". implode(',',$tipos_bloqueo_rel) );
+            //require_once 'include/api/SugarApiException.php';
+			require_once 'custom/include/api/CstmException.php';
+            //throw new SugarApiExceptionInvalidParameter("El registro no se puede guardar ya que la cuenta relacionada se encuentra bloqueada por: ". implode(',',$tipos_bloqueo_rel) );
+            throw new CstmException("El registro no se puede guardar ya que la cuenta relacionada se encuentra bloqueada por: ". implode(',',$tipos_bloqueo_rel) );
             
         }
 
