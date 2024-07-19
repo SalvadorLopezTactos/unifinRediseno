@@ -12,6 +12,7 @@
     initialize: function (options) {
         //self = this;
         contexto_cuenta = this;
+        contexto_cuenta.valorPrevioRegimenFiscal = null;
         self.hasContratosActivos = false;
         this._super("initialize", [options]);
 
@@ -1053,18 +1054,18 @@
         //Si el registro es Persona Fisica, ya no se podra cambiar a Persona Moral
         this.model.on("change:tipodepersona_c", _.bind(function () {
 
-            if (this.model._previousAttributes.tipodepersona_c == 'Persona Fisica') {
+            if ( contexto_cuenta.valorPrevioRegimenFiscal == 'Persona Fisica') {
                 if (this.model.get('tipodepersona_c') == 'Persona Moral') {
                     this.model.set('tipodepersona_c', 'Persona Fisica');
                 }
             }
-            if (this.model._previousAttributes.tipodepersona_c == 'Persona Fisica con Actividad Empresarial') {
+            if ( contexto_cuenta.valorPrevioRegimenFiscal == 'Persona Fisica con Actividad Empresarial') {
                 if (this.model.get('tipodepersona_c') == 'Persona Moral') {
                     this.model.set('tipodepersona_c', 'Persona Fisica con Actividad Empresarial');
                 }
             }
             //Si es Persona Moral, ya no se podra cambiar a Persona Fisica
-            if (this.model._previousAttributes.tipodepersona_c == 'Persona Moral') {
+            if ( contexto_cuenta.valorPrevioRegimenFiscal == 'Persona Moral') {
                 if (this.model.get('tipodepersona_c') == 'Persona Fisica' || this.model.get('tipodepersona_c') == 'Persona Fisica con Actividad Empresarial') {
                     this.model.set('tipodepersona_c', 'Persona Moral');
                 }
@@ -9158,7 +9159,12 @@ validaReqUniclickInfo: function () {
 				}
 			}, this)
 		});
+        this.setPreviousValueRegimenFiscal();
 	},
+
+    setPreviousValueRegimenFiscal: function (){
+        contexto_cuenta.valorPrevioRegimenFiscal = this.model.get('tipodepersona_c');
+    },
 
     showSubpanels:function(){
 
