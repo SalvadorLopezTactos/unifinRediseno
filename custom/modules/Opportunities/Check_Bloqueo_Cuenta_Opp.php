@@ -27,13 +27,23 @@ class Check_Bloqueo_Cuenta_Opp{
                 if (!$current_user->cac_c) {
                     $tipos_bloqueo = $responseBloqueo['tipo'];
                     require_once 'include/api/SugarApiException.php';
-                    throw new SugarApiExceptionInvalidParameter("El registro no se puede guardar ya que la cuenta relacionada se encuentra bloqueada por: " . implode(',', $tipos_bloqueo));
+                    require_once 'custom/include/api/CstmException.php';
+                    if( $_SESSION['platform'] == 'base'  || $_SESSION['platform'] == 'mobile'){
+                        throw new SugarApiExceptionInvalidParameter("El registro no se puede guardar ya que la cuenta relacionada se encuentra bloqueada por: ". implode(',',$tipos_bloqueo) );
+                    }else{
+                        throw new CstmException("El registro no se puede guardar ya que la cuenta relacionada se encuentra bloqueada por: ". implode(',',$tipos_bloqueo) );
+                    }
                 }
 
             }else{
                 $tipos_bloqueo = $responseBloqueo['tipo'];
                 require_once 'include/api/SugarApiException.php';
-                throw new SugarApiExceptionInvalidParameter("El registro no se puede guardar ya que la cuenta relacionada se encuentra bloqueada por: " . implode(',', $tipos_bloqueo));
+                require_once 'custom/include/api/CstmException.php';
+                if( $_SESSION['platform'] == 'base'  || $_SESSION['platform'] == 'mobile'){
+                    throw new SugarApiExceptionInvalidParameter("El registro no se puede guardar ya que la cuenta relacionada se encuentra bloqueada por: ". implode(',',$tipos_bloqueo) );
+                }else{
+                    throw new CstmException("El registro no se puede guardar ya que la cuenta relacionada se encuentra bloqueada por: ". implode(',',$tipos_bloqueo) );
+                }
             } 
         }
         
