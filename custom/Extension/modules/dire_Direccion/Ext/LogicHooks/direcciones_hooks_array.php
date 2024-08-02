@@ -5,7 +5,7 @@
  * Date: 6/15/2015
  * Time: 12:18 PM
  */
-
+/*
 $hook_array['after_save'][] = Array(
     2,
     'WS Inserta dirección en UNICS',
@@ -13,6 +13,7 @@ $hook_array['after_save'][] = Array(
     'Dir_Direcciones_Hooks',
     'insertarDireccionenUNICS'
 );
+*/
 
 $hook_array['before_save'][] = Array(
     1,
