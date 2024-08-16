@@ -186,7 +186,7 @@
         this.model.addValidationTask('dataOrigen',_.bind(this.dataOrigen, this));
 		this.model.addValidationTask('SOCInicio', _.bind(this.SOCInicio, this));
 		this.model.addValidationTask('negocio_c', _.bind(this.negocios, this));
-		this.model.addValidationTask('validaCreacionLeasing', _.bind(this.validaCreacionLeasing, this));
+		//this.model.addValidationTask('validaCreacionLeasing', _.bind(this.validaCreacionLeasing, this));
     },
 
     /* producto_financiero: function () {
