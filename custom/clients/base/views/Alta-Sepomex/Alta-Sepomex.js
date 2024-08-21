@@ -10,20 +10,28 @@
         'click .continueCheckCP':'continueCheckCP',
         'click .cancelSaveRecord':'cancelSaveRecord',
         'click .saveRecordCP':'saveRecordCP',
+        'change .selectEstado':'populateCiudades',
+        'change .selectCiudad':'populateMunicipios'
     },
 
     flagClickModal:null,
+
+    lista:null,
 
     initialize: function(options){
         this._super("initialize", [options]);
         self=this;
         this.paises_list=App.lang.getAppListStrings('paises_list');
+        this.paisId = "2";
+        this.paisName = "México";
         //Eliminando la opción de México, ya que es un registro extranjero
         Object.keys(this.paises_list).forEach(function (key) {
             if (key == "2") {
                 delete self.paises_list[key];
             }
         });
+
+        this.getListadoSepomex();
 
     },
 
@@ -72,6 +80,127 @@
         this.openModalCheckCP();
     },
 
+    getListadoSepomex:function(){
+
+        app.alert.show('loadingSepomex', {
+        level: 'process',
+        title: 'Cargando...',
+        });
+
+        var strUrl = 'ListadoSepomex';
+
+        app.api.call('GET', app.api.buildURL(strUrl), null, {
+            success: _.bind(function (data) {
+
+                app.alert.dismiss('loadingSepomex');
+                self.lista = data.detail;
+
+                self.estados_list={};
+                self.estados_list[""] = "Selecciona un estado";
+                for (let estado in self.lista) {
+                    if( self.lista[estado].id_estado != null ){
+
+                        self.estados_list[self.lista[estado].id_estado] = estado;
+                    }
+                }
+
+                var sortedArray = Object.entries(self.estados_list).sort((a, b) => {
+                    // Convertir claves numéricas a números para un orden correcto
+                    let keyA = parseInt(a[0], 10);
+                    let keyB = parseInt(b[0], 10);
+                    
+                    if (keyA === keyB) {
+                        return a[1].localeCompare(b[1]); // Si las claves son iguales, ordenar por el nombre
+                    }
+                    
+                    return keyA - keyB; // Ordenar por clave numérica
+                });
+
+                var sortedEstadosList = Object.fromEntries(sortedArray);
+
+                self.estados_list = sortedEstadosList;
+                self.render();
+            
+            }, self)
+        });
+
+    },
+
+    populateCiudades:function(e){
+
+        $('#ciudad').empty();
+        $('#municipio').empty();
+        const ciudadSelect = document.getElementById('ciudad');
+        const estadoSelect = document.getElementById('estado');
+        const municipioSelect = document.getElementById('municipio');
+
+        ciudadSelect.innerHTML = '<option value="">Selecciona una ciudad</option>';
+        municipioSelect.innerHTML = '<option value="">Selecciona un municipio</option>';
+        $('#ciudad').select2('val','');
+        $('#municipio').select2('val','');
+
+        //ciudadSelect.disabled = true;
+        //municipioSelect.innerHTML = '<option value="">Selecciona un municipio</option>';
+        //municipioSelect.disabled = true;
+        
+        var valEstado = $(e.currentTarget).val();
+
+        if( valEstado !== "" ){
+            var estadoText = this.estados_list[valEstado]
+            const ciudades = self.lista[estadoText].ciudades;
+
+            self.ciudades_list={};
+               
+            for (let ciudad in ciudades) {
+                self.ciudades_list[ciudades[ciudad].id_ciudad] = ciudad;
+                let option = document.createElement('option');
+                option.value = ciudades[ciudad].id_ciudad;
+                option.text = ciudad;
+                ciudadSelect.appendChild(option);
+
+            }
+            //self.render();
+            //this.closeModalCheckCP();
+            //this.openModalRecordCP();
+
+        }
+    },
+
+    populateMunicipios:function(e){
+
+        const municipioSelect = document.getElementById('municipio');
+        const estadoSelect = document.getElementById('estado');
+        const ciudadSelect = document.getElementById('ciudad');
+
+        const selectedEstado = estadoSelect.options[estadoSelect.selectedIndex].text;
+        const selectedCiudad = ciudadSelect.options[ciudadSelect.selectedIndex].text;
+        
+        municipioSelect.innerHTML = '<option value="">Selecciona un municipio</option>';
+        $('#municipio').select2('val','');
+
+        if (selectedCiudad !== "") {
+            if( selectedEstado !== 'Selecciona un estado' ){
+
+                if( selectedCiudad !== 'Selecciona una ciudad' ){
+
+                    const municipios = self.lista[selectedEstado].ciudades[selectedCiudad].municipios;
+        
+                    // Llenar el select de municipios
+                    municipios.forEach(municipio => {
+                        let option = document.createElement('option');
+                        option.value = municipio.id_municipio;
+                        option.text = municipio.municipio;
+                        municipioSelect.appendChild(option);
+                    });
+                }
+
+            }
+
+            //municipioSelect.disabled = false;
+        }
+
+    },
+
     /* Función para establecer valor a solo un checkbox */
     setCheckNacionalExt:function(e){
         var checked=$(e.currentTarget).is(":checked");
@@ -100,7 +229,10 @@
         }else{
             if(this.nacionalidad=="nacional"){
                 $(e.currentTarget).addClass('disabled');
-                $('#processingCheckCP').show();
+
+                this.isNational=(this.nacionalidad=='nacional') ? true:false;
+
+                //$('#processingCheckCP').show();
 
                 var str_length = cpValue.length;
                 //Valida formato
@@ -108,63 +240,70 @@
                 var isNumber = pattern.test(cpValue);
                 if (str_length >= 5 && isNumber){
 
-                    //LLamada a api custom
-                    app.alert.show('loadingCheckCP', {
-                        level: 'process',
-                        title: 'Cargando información de Código Postal ...',
-                    });
+                    this.render();
+                    this.closeModalCheckCP();
+                    this.openModalRecordCP();
+                    $('#estado').select2('val','');
+                    $('#ciudad').empty();
+                    $('#municipio').empty();
 
-                    var strUrl = 'DireccionesCP/' + cpValue + '/0';
+                    // //LLamada a api custom
+                    // app.alert.show('loadingCheckCP', {
+                    //     level: 'process',
+                    //     title: 'Cargando información de Código Postal ...',
+                    // });
 
-                    app.api.call('GET', app.api.buildURL(strUrl), null, {
-                        success: _.bind(function (data) {
-                            if(data.paises.length>0){
-                                console.log(self.nacionalidad);
-                                self.isNational=(self.nacionalidad=='nacional') ? true:false;
+                    // var strUrl = 'DireccionesCP/' + cpValue + '/0';
 
-                                if(self.isNational){
-                                    self.estados_list={};
-                                    self.ciudades_list={};
-                                    self.municipios_list={};
-                                    self.paisId=data.paises[0].idPais;
-                                    self.paisName=data.paises[0].namePais;
+                    // app.api.call('GET', app.api.buildURL(strUrl), null, {
+                    //     success: _.bind(function (data) {
+                    //         if(data.paises.length>0){
+                    //             console.log(self.nacionalidad);
+                    //             self.isNational=(self.nacionalidad=='nacional') ? true:false;
+
+                    //             if(self.isNational){
+                    //                 self.estados_list={};
+                    //                 self.ciudades_list={};
+                    //                 self.municipios_list={};
+                    //                 self.paisId=data.paises[0].idPais;
+                    //                 self.paisName=data.paises[0].namePais;
                                     
-                                    for (let index = 0; index < data.estados.length; index++) {
-                                        self.estados_list[data.estados[index].idEstado]=data.estados[index].nameEstado;
-                                    }
+                    //                 for (let index = 0; index < data.estados.length; index++) {
+                    //                     self.estados_list[data.estados[index].idEstado]=data.estados[index].nameEstado;
+                    //                 }
 
-                                    for (let index = 0; index < data.ciudades.length; index++) {
-                                        self.ciudades_list[data.ciudades[index].idCiudad]=data.ciudades[index].nameCiudad;
-                                    }
+                    //                 for (let index = 0; index < data.ciudades.length; index++) {
+                    //                     self.ciudades_list[data.ciudades[index].idCiudad]=data.ciudades[index].nameCiudad;
+                    //                 }
 
-                                    for (let index = 0; index < data.municipios.length; index++) {
-                                        self.municipios_list[data.municipios[index].idMunicipio]=data.municipios[index].nameMunicipio;
-                                    }
-                                }
+                    //                 for (let index = 0; index < data.municipios.length; index++) {
+                    //                     self.municipios_list[data.municipios[index].idMunicipio]=data.municipios[index].nameMunicipio;
+                    //                 }
+                    //             }
 
-                                $(self.e.currentTarget).removeClass('disabled');
-                                app.alert.dismiss('loadingCheckCP');
-                                $('#processingCheckCP').hide();
-                                $('#codigoPostal').attr('style','');
+                    //             $(self.e.currentTarget).removeClass('disabled');
+                    //             app.alert.dismiss('loadingCheckCP');
+                    //             $('#processingCheckCP').hide();
+                    //             $('#codigoPostal').attr('style','');
 
-                                self.flagClickModal=true;
-                                self.render();
-                                self.closeModalCheckCP();
-                                self.openModalRecordCP();
-                            }else{
-                                $(self.e.currentTarget).removeClass('disabled');
-                                app.alert.dismiss('loadingCheckCP');
-                                $('#processingCheckCP').hide();
+                    //             self.flagClickModal=true;
+                    //             self.render();
+                    //             self.closeModalCheckCP();
+                    //             self.openModalRecordCP();
+                    //         }else{
+                    //             $(self.e.currentTarget).removeClass('disabled');
+                    //             app.alert.dismiss('loadingCheckCP');
+                    //             $('#processingCheckCP').hide();
 
-                                app.alert.show('invalid_cp', {
-                                    level: 'error',
-                                    autoClose: true,
-                                    messages: 'El C\u00F3digo Postal ingresado no existe'
-                                });
-                            }
+                    //             app.alert.show('invalid_cp', {
+                    //                 level: 'error',
+                    //                 autoClose: true,
+                    //                 messages: 'El C\u00F3digo Postal ingresado no existe'
+                    //             });
+                    //         }
                         
-                        }, self)
-                    });
+                    //     }, self)
+                    // });
                     
                 }else{
                     $(e.currentTarget).removeClass('disabled');
@@ -190,7 +329,7 @@
     },
 
     saveRecordCP:function(e){
-
+        $('#colonia').attr('style','');
         //Se valida si el CP es nacional, ya que los registros nacionales se obtienen a través de "selects" y las extranjeras son "inputs"
         if(this.isNational){
             var cp=$('#codigoPostalSave').val();
@@ -231,11 +370,25 @@
             "labelColonia":colonia
         }
 
-        var url=app.api.buildURL("CheckSaveSepomex", '', {}, {});
+        var url=app.api.buildURL("saveRecordSepomex", '', {}, {});
 
         //Al ser nacional solo se valida la Colonia, ya que los otros campos vienen pre llenos
         if(this.isNational){
-            if(colonia !=""){
+            var strErrorFaltantes = "Favor de ingresar: <br>";
+            if( estado == "" || estado == null ){
+                strErrorFaltantes += "Estado<br>";
+            }
+            if( ciudad == "" || ciudad == null ){
+                strErrorFaltantes += "Ciudad<br>";
+            }
+            if( municipio == "" || municipio == null ){
+                strErrorFaltantes += "Municipio<br>";
+            }
+            if( colonia == "" || colonia == null ){
+                strErrorFaltantes += "Colonia\n";
+                $('#colonia').attr('style','border:1px solid red;');
+            }
+            if(strErrorFaltantes == "Favor de ingresar: <br>"){
                 $('#processingSaveCheckCP').show();
                 $(e.currentTarget).addClass('disabled');
     
@@ -264,12 +417,12 @@
                 });
     
             }else{
-                app.alert.show('errorColonia', {
+                app.alert.show('errorFaltantes', {
                     level: 'error',
-                    messages: 'Favor de ingresar Colonia',
+                    messages: strErrorFaltantes,
                     autoClose: true
                 });
-                $('#colonia').attr('style','border:1px solid red;');
+                
             }
         }else{//Else para extranjero y validar todos los campos vacíos
             var inputs=$('.formField');
