@@ -85,9 +85,11 @@ class CheckSaveSepomex extends SugarApi
         $labelMunicipio=$args['labelMunicipio'];
         //$colonia=$args['colonia'];
         $labelColonia=$args['labelColonia'];
+        $cleanedLabelColonia =strtolower(str_replace([' ', '.', ',', '(', ')'], '', $labelColonia));
 
-        $selectSepomex="SELECT id FROM dir_sepomex WHERE codigo_postal='{$cp}' AND id_pais='{$pais}' AND id_estado='{$estado}' AND id_ciudad='{$ciudad}' AND id_municipio='{$municipio}' and colonia='{$labelColonia}'";
+        $selectSepomex="SELECT id FROM dir_sepomex WHERE codigo_postal='{$cp}' AND id_pais='{$pais}' AND id_estado='{$estado}' AND id_ciudad='{$ciudad}' AND id_municipio='{$municipio}' and LOWER(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(colonia, ' ', ''), '.', ''), ',', ''), '(', ''), ')', ''))='{$cleanedLabelColonia}'";
 
+        $GLOBALS['log']->fatal($selectSepomex);
         $result=$GLOBALS['db']->query($selectSepomex);
 
         $GLOBALS['log']->fatal("Num rows: ".$result->num_rows);
