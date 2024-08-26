@@ -11,7 +11,11 @@
         'click .cancelSaveRecord':'cancelSaveRecord',
         'click .saveRecordCP':'saveRecordCP',
         'change .selectEstado':'populateCiudades',
-        'change .selectCiudad':'populateMunicipios'
+        'change .selectCiudad':'populateMunicipios',
+        'click .btnNewCiudad':'showInputCiudad',
+        'click .btnNewMunicipio':'showInputMunicipio',
+        'click #iconNewCiudad':'hideNewCiudad',
+        'click #iconNewMunicipio':'hideNewMunicipio',
     },
 
     flagClickModal:null,
@@ -201,6 +205,37 @@
 
     },
 
+    showInputCiudad:function(e){
+        //Muestra input, oculta select2 de ciudad
+        $('#newCiudad').show();
+        $('#iconNewCiudad').show();
+        $('.selectCiudad').hide();
+    },
+
+    showInputMunicipio:function(e){
+
+        $('#newMunicipio').show();
+        $('#iconNewMunicipio').show();
+        $('.selectMunicipio').hide();
+
+    },
+
+    hideNewCiudad:function(){
+
+        $('#newCiudad').hide();
+        $('#iconNewCiudad').hide();
+        $('.select2-container.selectCiudad').show();
+
+    },
+
+    hideNewMunicipio:function(){
+
+        $('#newMunicipio').hide();
+        $('#iconNewMunicipio').hide();
+        $('.select2-container.selectMunicipio').show();
+
+    },
+
     /* Función para establecer valor a solo un checkbox */
     setCheckNacionalExt:function(e){
         var checked=$(e.currentTarget).is(":checked");
@@ -240,72 +275,105 @@
                 var isNumber = pattern.test(cpValue);
                 if (str_length >= 5 && isNumber){
 
-                    this.render();
-                    this.closeModalCheckCP();
-                    this.openModalRecordCP();
-                    $('#estado').select2('val','');
-                    $('#ciudad').empty();
-                    $('#municipio').empty();
+                    //this.render();
+                    //this.closeModalCheckCP();
+                    //this.openModalRecordCP();
+                    
+                    //$('#estado').select2('val','');
+                    //$('#ciudad').empty();
+                    //$('#municipio').empty();
 
                     // //LLamada a api custom
-                    // app.alert.show('loadingCheckCP', {
-                    //     level: 'process',
-                    //     title: 'Cargando información de Código Postal ...',
-                    // });
+                    app.alert.show('loadingCheckCP', {
+                        level: 'process',
+                        title: 'Cargando información de Código Postal ...',
+                    });
 
-                    // var strUrl = 'DireccionesCP/' + cpValue + '/0';
+                    var strUrl = 'DireccionesCP/' + cpValue + '/0';
 
-                    // app.api.call('GET', app.api.buildURL(strUrl), null, {
-                    //     success: _.bind(function (data) {
-                    //         if(data.paises.length>0){
-                    //             console.log(self.nacionalidad);
-                    //             self.isNational=(self.nacionalidad=='nacional') ? true:false;
+                    app.api.call('GET', app.api.buildURL(strUrl), null, {
+                        success: _.bind(function (data) {
+                            if(data.paises.length>0){
+                                console.log(self.nacionalidad);
+                                self.isNational=(self.nacionalidad=='nacional') ? true:false;
 
-                    //             if(self.isNational){
-                    //                 self.estados_list={};
-                    //                 self.ciudades_list={};
-                    //                 self.municipios_list={};
-                    //                 self.paisId=data.paises[0].idPais;
-                    //                 self.paisName=data.paises[0].namePais;
+                                if(self.isNational){
+                                    self.estados_list={};
+                                    self.ciudades_list={};
+                                    self.municipios_list={};
+                                    self.paisId=data.paises[0].idPais;
+                                    self.paisName=data.paises[0].namePais;
                                     
-                    //                 for (let index = 0; index < data.estados.length; index++) {
-                    //                     self.estados_list[data.estados[index].idEstado]=data.estados[index].nameEstado;
-                    //                 }
+                                    for (let index = 0; index < data.estados.length; index++) {
+                                        self.estados_list[data.estados[index].idEstado]=data.estados[index].nameEstado;
+                                    }
 
-                    //                 for (let index = 0; index < data.ciudades.length; index++) {
-                    //                     self.ciudades_list[data.ciudades[index].idCiudad]=data.ciudades[index].nameCiudad;
-                    //                 }
+                                    for (let index = 0; index < data.ciudades.length; index++) {
+                                        self.ciudades_list[data.ciudades[index].idCiudad]=data.ciudades[index].nameCiudad;
+                                    }
 
-                    //                 for (let index = 0; index < data.municipios.length; index++) {
-                    //                     self.municipios_list[data.municipios[index].idMunicipio]=data.municipios[index].nameMunicipio;
-                    //                 }
-                    //             }
+                                    for (let index = 0; index < data.municipios.length; index++) {
+                                        self.municipios_list[data.municipios[index].idMunicipio]=data.municipios[index].nameMunicipio;
+                                    }
+                                }
 
-                    //             $(self.e.currentTarget).removeClass('disabled');
-                    //             app.alert.dismiss('loadingCheckCP');
-                    //             $('#processingCheckCP').hide();
-                    //             $('#codigoPostal').attr('style','');
+                                $(self.e.currentTarget).removeClass('disabled');
+                                app.alert.dismiss('loadingCheckCP');
+                                $('#processingCheckCP').hide();
+                                $('#codigoPostal').attr('style','');
 
-                    //             self.flagClickModal=true;
-                    //             self.render();
-                    //             self.closeModalCheckCP();
-                    //             self.openModalRecordCP();
-                    //         }else{
-                    //             $(self.e.currentTarget).removeClass('disabled');
-                    //             app.alert.dismiss('loadingCheckCP');
-                    //             $('#processingCheckCP').hide();
+                                self.flagClickModal=true;
+                                self.render();
+                                self.closeModalCheckCP();
+                                self.openModalRecordCP();
+                            }else{
+                                
+                                
+                                //Aunque no exista, se llena el Estado con base al Rango, únicamente se toman los primeros 2 caracteres
+                                var strUrl = 'GetRangoCP/' + cpValue.slice(0,2);
 
-                    //             app.alert.show('invalid_cp', {
-                    //                 level: 'error',
-                    //                 autoClose: true,
-                    //                 messages: 'El C\u00F3digo Postal ingresado no existe'
-                    //             });
-                    //         }
+                                app.api.call('GET', app.api.buildURL(strUrl), null, {
+                                    success: _.bind(function (data) {
+                                        $(self.e.currentTarget).removeClass('disabled');
+                                        app.alert.dismiss('loadingCheckCP');
+                                        $('#processingCheckCP').hide();
+                                        if( data.detail.length == undefined ){ //length undefined quiere decir que si existen Estados relacionados a esete CP
+                                            self.estados_list = {};
+                                            var estado_default = '';
+                                            for (let estado in data.detail) {
+                                                estado_default = estado;
+                                                self.estados_list[estado] = data.detail[estado];
+                                            }
+
+                                            self.render();
+
+                                            self.closeModalCheckCP();
+                                            self.openModalRecordCP();
+                                            
+                                            $('#estado').select2('val',estado_default);
+                                            $('#estado').trigger('change');
+
+                                            //Se deshabilita el estado solo si existe un estado relacionado
+                                            if(Object.keys(self.estados_list).length == 1){
+                                                $('#estado').prop("disabled", true);
+                                            }
+                                            
+                                        }else{
+                                            //Se pone la lista completa de estados
+                                        }
+                                        
+                                        
+                                    }, self)
+                                });
+
+                                
+                            }
                         
-                    //     }, self)
-                    // });
+                        }, self)
+                    });
                     
                 }else{
+
                     $(e.currentTarget).removeClass('disabled');
                     $('#processingCheckCP').hide();
                     $('#codigoPostal').attr('style','border:1px solid red;');
@@ -337,10 +405,15 @@
             var labelPais=$('#paisRecord').val();
             var estado=$('#estado').val();
             var labelEstado=$('#estado option:selected').text();
-            var ciudad=$('#ciudad').val();
-            var labelCiudad=$('#ciudad option:selected').text();
-            var municipio=$('#municipio').val();
-            var labelMunicipio=$('#municipio option:selected').text();
+            //var ciudad=$('#ciudad').val();
+            //var labelCiudad=$('#ciudad option:selected').text();
+            //Se toma el valor del campo que se encuentre visible
+            var ciudad = ( $('#newCiudad').is(":visible") ) ? $('#newCiudad').val().trim() : $('#ciudad').val();
+            var labelCiudad = ( $('#newCiudad').is(":visible") ) ? $('#newCiudad').val().trim() : $('#ciudad option:selected').text();
+            //var municipio=$('#municipio').val();
+            //var labelMunicipio=$('#municipio option:selected').text();
+            var municipio = ( $('#newMunicipio').is(":visible") ) ? $('#newMunicipio').val().trim() : $('#municipio').val();
+            var labelMunicipio = ( $('#newMunicipio').is(":visible") ) ? $('#newMunicipio').val().trim() : $('#municipio option:selected').text();
             var colonia=$('#colonia').val().trim();
         }else{
             var cp=$('#codigoPostalSave').val();

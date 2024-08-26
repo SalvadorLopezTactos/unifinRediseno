@@ -19,6 +19,15 @@ class ListadoSepomex extends SugarApi
                 'method' => 'getListadoSepomex',
                 'shortHelp' => 'Obtiene información de Sepomex para recuperar lista de Estados, Ciudades y Municipios relacionados entre si',
             ),
+            'retrieve_rango_cp' => array(
+                'reqType' => 'GET',
+                'noLoginRequired' => true,
+                'path' => array('GetRangoCP', '?'),
+                'pathVars' => array('module', 'cp'),
+                'method' => 'getEstadoyRangoCP',
+                'shortHelp' => 'Obtiene estado con base a los primeros 2 digitos del CP',
+                'longHelp' => '',
+            ),
         );
     }
 
@@ -68,5 +77,31 @@ class ListadoSepomex extends SugarApi
         }
 
     }
+
+    public function getEstadoyRangoCP($api, $args){
+
+        $cp = $args['cp'];
+
+        $data = array();
+  
+        $query = "SELECT distinct estado, id_estado
+        FROM dir_sepomex
+        WHERE codigo_postal lIKE '{$cp}%'";
+  
+        $result = $GLOBALS['db']->query($query);
+  
+        while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
+            $data[$row['id_estado']] = $row['estado'];
+          
+        }
+
+        $response['status'] = "OK";
+        $response['detail'] = $data;
+
+        return $response;
+  
+  
+  
+      }
 
 }
