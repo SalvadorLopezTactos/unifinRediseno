@@ -79,9 +79,13 @@ class CheckSaveSepomex extends SugarApi
         $labelPais=$args['labelPais'];
         $estado=$args['estado'];
         $labelEstado=$args['labelEstado'];
-        $ciudad=$args['ciudad'];
+        //$ciudad=$args['ciudad'];
+        //Se genera un nuevo id en caso de que la ciudad se tome como nueva
+        $ciudad= ( strlen($args['ciudad'] == 2) ) ? $args['ciudad']: Uuid::uuid1();
         $labelCiudad=$args['labelCiudad'];
-        $municipio=$args['municipio'];
+        //$municipio=$args['municipio'];
+        //Se genera un nuevo id en caso de que el municipio se tome como nuevo
+        $municipio= ( strlen($args['municipio'] == 2) ) ? $args['municipio']: Uuid::uuid1();
         $labelMunicipio=$args['labelMunicipio'];
         //$colonia=$args['colonia'];
         $labelColonia=$args['labelColonia'];
