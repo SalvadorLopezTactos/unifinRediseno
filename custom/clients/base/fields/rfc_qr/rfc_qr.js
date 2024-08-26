@@ -506,6 +506,7 @@
 														Ciudad = ( Ciudad == '' ) ? '_' : Ciudad;
 
 														var strUrl = 'DireccionesQR/' + CP + '/0/' + Colonia +'/'+Municipio+'/'+Estado+'/'+Ciudad;
+                            strUrl = strUrl.replaceAll(' ','+');
 														app.api.call('GET', app.api.buildURL(strUrl), null, {
 															success: _.bind(function (data) {
 																Colonia = (Colonia == '_') ? ' ' : Colonia;
