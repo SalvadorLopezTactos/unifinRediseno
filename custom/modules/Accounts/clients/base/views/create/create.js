@@ -685,11 +685,13 @@
             Object.keys(new_options).forEach(function (key) {
               delete new_options[key];
             });
+            /*
             //Valida el puesto del usuraio conectado
             var puesto = app.user.get('puestousuario_c');
             if(puesto!=1 && puesto!=2 && puesto!=3 && puesto!=4 && puesto!=5 && puesto!=6 && puesto!=20 && puesto!=33 && puesto!=44 && puesto!=55) {
               new_options["2"] = "Prospecto";
             }
+            */
         }
         if (App.user.attributes.tct_alta_cd_chk_c == true || App.user.attributes.deudor_factoraje_c == true) {
             new_options["4"] = "Persona";
