@@ -12,7 +12,6 @@
     initialize: function (options) {
         //self = this;
         contexto_cuenta = this;
-        contexto_cuenta.valorPrevioRegimenFiscal = null;
         self.hasContratosActivos = false;
         this._super("initialize", [options]);
 
@@ -1054,18 +1053,18 @@
         //Si el registro es Persona Fisica, ya no se podra cambiar a Persona Moral
         this.model.on("change:tipodepersona_c", _.bind(function () {
 
-            if ( contexto_cuenta.valorPrevioRegimenFiscal == 'Persona Fisica') {
+            if (this.model._previousAttributes.tipodepersona_c == 'Persona Fisica') {
                 if (this.model.get('tipodepersona_c') == 'Persona Moral') {
                     this.model.set('tipodepersona_c', 'Persona Fisica');
                 }
             }
-            if ( contexto_cuenta.valorPrevioRegimenFiscal == 'Persona Fisica con Actividad Empresarial') {
+            if (this.model._previousAttributes.tipodepersona_c == 'Persona Fisica con Actividad Empresarial') {
                 if (this.model.get('tipodepersona_c') == 'Persona Moral') {
                     this.model.set('tipodepersona_c', 'Persona Fisica con Actividad Empresarial');
                 }
             }
             //Si es Persona Moral, ya no se podra cambiar a Persona Fisica
-            if ( contexto_cuenta.valorPrevioRegimenFiscal == 'Persona Moral') {
+            if (this.model._previousAttributes.tipodepersona_c == 'Persona Moral') {
                 if (this.model.get('tipodepersona_c') == 'Persona Fisica' || this.model.get('tipodepersona_c') == 'Persona Fisica con Actividad Empresarial') {
                     this.model.set('tipodepersona_c', 'Persona Moral');
                 }
@@ -3332,9 +3331,9 @@
             RFC = RFC.toUpperCase().trim();
             var expReg = "";
             if (this.model.get('tipodepersona_c') != 'Persona Moral') {
-                expReg = /^([A-Z\u00D1&]{3,4}) ?(?:- ?)?(\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])) ?(?:- ?)?([A-Z\d]{2})([A\d])$/;
+                expReg = /^[A-ZÑ&]{4}\d{6}[A-Z0-9]{3}$/; // /^([A-Z\u00D1&]{3,4}) ?(?:- ?)?(\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])) ?(?:- ?)?([A-Z\d]{2})([A\d])$/;
             } else {
-                expReg = /^([A-Z\u00D1&]{3,4}) ?(?:- ?)?(\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])) ?(?:- ?)?([A-Z\d]{2})([A\d])$/;
+                expReg = /^[A-ZÑ&]{3}\d{6}[A-Z0-9]{3}$/; // /^([A-Z\u00D1&]{3,4}) ?(?:- ?)?(\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])) ?(?:- ?)?([A-Z\d]{2})([A\d])$/;
             }
             if (!RFC.match(expReg)) {
                 app.alert.show("RFC incorrecto", {
@@ -9159,12 +9158,7 @@ validaReqUniclickInfo: function () {
 				}
 			}, this)
 		});
-        this.setPreviousValueRegimenFiscal();
 	},
-
-    setPreviousValueRegimenFiscal: function (){
-        contexto_cuenta.valorPrevioRegimenFiscal = this.model.get('tipodepersona_c');
-    },
 
     showSubpanels:function(){
 
