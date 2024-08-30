@@ -85,11 +85,11 @@ class CheckSaveSepomex extends SugarApi
         $labelCiudad=$args['labelCiudad'];
         //$municipio=$args['municipio'];
         //Se genera un nuevo id en caso de que el municipio se tome como nuevo
-        $municipio= ( strlen($args['municipio'] == 2) ) ? $args['municipio']: Uuid::uuid1();
+        $municipio= ( strlen($args['municipio'] == 3) ) ? $args['municipio']: Uuid::uuid1();
         $labelMunicipio=$args['labelMunicipio'];
         //$colonia=$args['colonia'];
         $labelColonia=$args['labelColonia'];
-        $cleanedLabelColonia =strtolower(str_replace([' ', '.', ',', '(', ')'], '', $labelColonia));
+        $cleanedLabelColonia = strtolower(str_replace([' ', '.', ',', '(', ')'], '', $labelColonia));
 
         $selectSepomex="SELECT id FROM dir_sepomex WHERE codigo_postal='{$cp}' AND id_pais='{$pais}' AND id_estado='{$estado}' AND id_ciudad='{$ciudad}' AND id_municipio='{$municipio}' and LOWER(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(colonia, ' ', ''), '.', ''), ',', ''), '(', ''), ')', ''))='{$cleanedLabelColonia}'";
 
@@ -105,8 +105,9 @@ class CheckSaveSepomex extends SugarApi
             $new_id_sep=Uuid::uuid1();
             $id_user=$current_user->id;
             $current_date=TimeDate::getInstance()->nowDb();
+            $id_colonia = Uuid::uuid1();
             $name=$labelPais ." ".$cp." ".$labelEstado." ".$labelColonia;//labelPais CP Estado Colonia
-            $qinsertRecordSepomex="INSERT INTO `dir_sepomex` (`id`, `name`, `date_entered`, `date_modified`, `modified_user_id`, `created_by`, `deleted`, `pais`, `id_pais`, `codigo_postal`, `estado`, `id_estado`, `ciudad`, `id_ciudad`, `municipio`, `id_municipio`, `colonia`) VALUES ('{$new_id_sep}', '{$name}', '{$current_date}', '{$current_date}', '{$id_user}', '{$id_user}', '0', '{$labelPais}', '{$pais}', '{$cp}', '{$labelEstado}', '{$estado}','{$labelCiudad}', '{$ciudad}', '{$labelMunicipio}', '{$municipio}', '{$labelColonia}');";
+            $qinsertRecordSepomex="INSERT INTO `dir_sepomex` (`id`, `name`, `date_entered`, `date_modified`, `modified_user_id`, `created_by`, `deleted`, `pais`, `id_pais`, `codigo_postal`, `estado`, `id_estado`, `ciudad`, `id_ciudad`, `municipio`, `id_municipio`, `colonia`, `id_colonia`) VALUES ('{$new_id_sep}', '{$name}', '{$current_date}', '{$current_date}', '{$id_user}', '{$id_user}', '0', '{$labelPais}', '{$pais}', '{$cp}', '{$labelEstado}', '{$estado}','{$labelCiudad}', '{$ciudad}', '{$labelMunicipio}', '{$municipio}', '{$labelColonia}', '{$id_colonia}');";
             //$GLOBALS['log']->fatal("INSERTANDO SEPOMEX");
             //$GLOBALS['log']->fatal($qinsertRecordSepomex);
 
