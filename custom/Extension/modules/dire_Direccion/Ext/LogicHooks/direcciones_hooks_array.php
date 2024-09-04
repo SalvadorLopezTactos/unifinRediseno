@@ -64,6 +64,14 @@ $hook_array['before_save'][] = Array(
     'setValoresPorActualizar'
 );
 
+$hook_array['before_save'][] = Array(
+    7,
+    'Establece información en campo description con identificadores de sepomex para mostrar direcciones correctamente en módulo de cuentas',
+    'custom/modules/dire_Direccion/Dir_Direcciones_Hooks.php',
+    'Dir_Direcciones_Hooks',
+    'setDescriptionSepomex'
+);
+
 
 /*
 $hook_array['after_save'][] = Array(

@@ -562,4 +562,27 @@ SQL;
 
 
     }
+
+    public function setDescriptionSepomex( $bean = null, $event = null, $args = null ){
+
+        $id_sepomex_actual = $bean->rel_fields_before_value['dir_sepomex_dire_direcciondir_sepomex_ida'];
+        $id_sepomex_nuevo = $bean->dir_sepomex_dire_direcciondir_sepomex_ida;
+
+        if( $id_sepomex_actual != $id_sepomex_nuevo ){
+            //Se obtienen identificadores de sepomex
+            $beanSepomex = BeanFactory::getBean("dir_Sepomex", $id_sepomex_nuevo, array('disable_row_level_security' => true) );
+
+            //$direccion->description="{$idPais}|{$idEstado}|{$idCiudad}|{$idMunicipio}|{$idMunicipio}";
+            $idPais = $beanSepomex->id_pais;
+            $idEstado = $beanSepomex->id_estado;
+            $idCiudad = $beanSepomex->id_ciudad;
+            $idMunicipio = $beanSepomex->id_municipio;
+            $idColonia = $beanSepomex->id_colonia;
+
+            $GLOBALS['log']->fatal("SE ESTABLECE DESCRIPCIÓN DE DIRECCIÓN");
+
+            $bean->description="{$idPais}|{$idEstado}|{$idCiudad}|{$idMunicipio}|{$idColonia}";
+        }
+
+    }
 }
