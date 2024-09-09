@@ -89,10 +89,14 @@ class altaDireccionUnifin extends SugarApi
 				}
 				if(!$error) {
 					//Crea Dirección
-					if($args['id']) $beanDir = BeanFactory::retrieveBean('dire_Direccion', $args['id'], array('disable_row_level_security' => true));
-					else $beanDir = BeanFactory::newBean('dire_Direccion');
-					if($args['usuario']) {
-						$beanDir->created_by = $args['usuario'];
+					if($args['id']){
+             $beanDir = BeanFactory::retrieveBean('dire_Direccion', $args['id'], array('disable_row_level_security' => true));
+          }
+          if(!isset($beanDir->id) ){
+             $beanDir = BeanFactory::newBean('dire_Direccion');
+          }
+					if($args['usuario'] && !$args['id']) {
+            $beanDir->created_by = $args['usuario'];
 						$beanDir->assigned_user_id = $args['usuario'];
 					}
 					$query = "select id from dire_codigopostal where name = '{$cp}'";
