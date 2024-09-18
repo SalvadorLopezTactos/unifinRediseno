@@ -828,15 +828,18 @@ SQL;
 
     public function textToUppperCase($bean = null, $event = null, $args = null)
     {
-        if ($_REQUEST['module'] != 'Import') {
-            foreach ($bean as $field => $value) {
-                if ($bean->field_defs[$field]['type'] == 'varchar' && $field != 'encodedkey_mambu_c' && $field != 'path_img_qr_c' && $field != 'salesforce_id_c') {
-                    $value = mb_strtoupper($value, "UTF-8");
-                    $bean->$field = $value;
-                }
-                if ($bean->field_defs[$field]['name'] == 'name') {
-                    $value = mb_strtoupper($value, "UTF-8");
-                    $bean->$field = $value;
+        if( isset($_REQUEST['module']) ){
+
+            if ($_REQUEST['module'] != 'Import') {
+                foreach ($bean as $field => $value) {
+                    if ($bean->field_defs[$field]['type'] == 'varchar' && $field != 'encodedkey_mambu_c' && $field != 'path_img_qr_c' && $field != 'salesforce_id_c') {
+                        $value = mb_strtoupper($value, "UTF-8");
+                        $bean->$field = $value;
+                    }
+                    if ($bean->field_defs[$field]['name'] == 'name') {
+                        $value = mb_strtoupper($value, "UTF-8");
+                        $bean->$field = $value;
+                    }
                 }
             }
         }
