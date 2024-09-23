@@ -90,3 +90,11 @@ $hook_array['before_save'][] = array(
     'Prospects_Onboarding',
     'updateApiOnboarding'
 );
+
+$hook_array['before_save'][] = array(
+    14,
+    'Actualización de email a Lead y Cuenta en caso de convertido',
+    'custom/modules/Prospects/Validate_Email.php',
+    'Validate_Email',
+    'checkUpdateEmailPO'
+);
