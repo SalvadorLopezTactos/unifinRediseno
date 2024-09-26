@@ -98,3 +98,11 @@ $hook_array['before_save'][] = array(
     'Validate_Email',
     'checkUpdateEmailPO'
 );
+
+$hook_array['before_save'][] = array(
+    15,
+    'Comprueba longitud y formato de campos de teléfono',
+    'custom/modules/Prospects/clean_fields.php',
+    'clean_fields_class',
+    'checkFormatPhones'
+);
