@@ -1416,6 +1416,15 @@ class SendEmailPO extends SugarApi
     public function sendEmailNotificationToProspect( $body_correo, $email_prospect, $name_prospect ){
 
         try{
+            global $app_list_strings;
+
+            $lista_emails = $app_list_strings['emails_cc_prospects_list'];
+            $arr_emails = array();
+            foreach ($lista_emails as $key => $email) {
+                array_push($arr_emails,$email);
+            }
+
+
             $mailer = MailerFactory::getSystemDefaultMailer();
             $mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
             $mailer->setSubject('Continúa tu registro en Unileasing');
@@ -1429,6 +1438,13 @@ class SendEmailPO extends SugarApi
             $mailer->clearRecipients();
             
             $mailer->addRecipientsTo(new EmailIdentity($email_prospect, $name_prospect));
+            if( count($arr_emails) > 0 ){
+
+                for ($i = 0; $i < count($arr_emails); $i++) {
+                    $GLOBALS['log']->fatal("AGREGANDO CORREOS CC: " . $arr_emails[$i]);
+                    $mailer->addRecipientsCc(new EmailIdentity($arr_emails[$i], $arr_emails[$i]));
+                }
+            }
                 
             $GLOBALS['log']->fatal("ENVIANDO CORREO A: ".$email_prospect );
             $result = $mailer->send();
