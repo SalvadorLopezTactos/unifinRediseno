@@ -1399,10 +1399,12 @@ function actualizaTipoCuenta($tipo=null, $subtipo=null, $idCuenta=null, $tipoPro
     function rechazoQuantico( $bean, $event, $arguments ){
 
         global $sugar_config;
-
+        $user = $sugar_config['quantico_usr'];
+        $pwd = $sugar_config['quantico_psw'];
+        $auth_encode = base64_encode($user . ':' . $pwd);
         $idSolicitud = $bean->idsolicitud_c;
         $idQuantico = $bean->quantico_id_c;
-        if( $bean->fetched_row['rechazo_quantico_c'] != $bean->rechazo_quantico_c && $bean->rechazo_quantico_c == 1 ){
+        if( $bean->rechazo_quantico_c == 1 ){
             if( !empty($idSolicitud) && !empty($idQuantico) ){
                 //Envía petición a quantico
                 $urlQuantico = $sugar_config['outsystems_url']."/OnboardingIntegration_API/rest/ExpedientIntegrationService/CompleteLiveRequestTasks?CreditRequestNumber=".$idSolicitud;
@@ -1410,7 +1412,7 @@ function actualizaTipoCuenta($tipo=null, $subtipo=null, $idCuenta=null, $tipoPro
                 $GLOBALS['log']->fatal("Petición rechazo Quantico: ".$urlQuantico);
 
                 $callApi = new UnifinAPI();
-                $response = $callApi->unifingetCall($urlQuantico);
+                $response = $callApi->getQuanticoCF($urlQuantico,$auth_encode);
                 $GLOBALS['log']->fatal("Respuesta rechazo quantico");
                 $GLOBALS['log']->fatal(print_r($response,true));
 

@@ -200,8 +200,8 @@ $hook_array['before_save'][] = Array(
    'verifica_cuenta_bloqueada_opp'
 );
 
-$hook_array['before_save'][] = Array(
-    28,
+$hook_array['after_save'][] = Array(
+    20,
     'Envía petición para cancelación en Quanticp',
     'custom/modules/Opportunities/opp_logic_hooks.php',
     'OpportunityLogic', // name of the class
