@@ -1395,4 +1395,28 @@ function actualizaTipoCuenta($tipo=null, $subtipo=null, $idCuenta=null, $tipoPro
 
     }
 
+
+    function rechazoQuantico( $bean, $event, $arguments ){
+
+        global $sugar_config;
+
+        $idSolicitud = $bean->idsolicitud_c;
+        $idQuantico = $bean->quantico_id_c;
+        if( $bean->fetched_row['rechazo_quantico_c'] != $bean->rechazo_quantico_c && $bean->rechazo_quantico_c == 1 ){
+            if( !empty($idSolicitud) && !empty($idQuantico) ){
+                //Envía petición a quantico
+                $urlQuantico = $sugar_config['outsystems_url']."/OnboardingIntegration_API/rest/ExpedientIntegrationService/CompleteLiveRequestTasks?CreditRequestNumber=".$idSolicitud;
+
+                $GLOBALS['log']->fatal("Petición rechazo Quantico: ".$urlQuantico);
+
+                $callApi = new UnifinAPI();
+                $response = $callApi->unifingetCall($urlQuantico);
+                $GLOBALS['log']->fatal("Respuesta rechazo quantico");
+                $GLOBALS['log']->fatal(print_r($response,true));
+
+
+            }
+        }
+
+    }
 }
