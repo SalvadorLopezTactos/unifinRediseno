@@ -6,7 +6,6 @@
         'change .oficinas_atiende': 'actualizaOficinasAtiende',
         'click #btnGuardarAsignados': 'saveAsignados',
         'change .usersActive': 'updateAsignado',
-        'click #btnRevertir': 'revertirCambios',
     },
 
     initialize: function(options){
@@ -208,17 +207,6 @@
 
       asignacionPO.listAsignadosActualizados.push(objetoActualizado);
 
-      $('#btnRevertir').show();
-    },
-
-    revertirCambios: function(){
-      asignacionPO.listaAsignacionSinEquipo = asignacionPO.listaAsignacionPOSinEquipoPrevio;
-
-      asignacionPO.listAsignadosActualizados = [];
-
-      asignacionPO.render();
-
-      $('#btnRevertir').hide();
     },
 
     saveAsignados: function(){
