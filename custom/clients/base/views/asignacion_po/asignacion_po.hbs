@@ -151,7 +151,8 @@
                     <span>
                       <select class="row-fluid selectZonaGeografica select2">
                         {{#each listZonaGeografica}}
-                            <option value="{{@key}}" {{ifSelected @key ../zonaGeograficaDefault}}>{{this}}</option>
+                            {{!-- <option value="{{@key}}" {{ifSelected @key ../zonaGeograficaDefault}}>{{this}}</option> --}}
+                            <option value="{{id}}" {{ifSelected id ../zonaGeograficaDefault}}>{{estado}}</option>
                         {{/each}}
                       </select>
                     </span>

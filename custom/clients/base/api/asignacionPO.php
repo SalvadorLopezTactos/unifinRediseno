@@ -131,13 +131,14 @@ class asignacionPO extends SugarApi
 
         $GLOBALS['log']->fatal("QUERYS ACTUALIZACIÓN");
         try{
-
+            global $current_user;
             for( $i=0; $i < count($arrNewAsignados); $i++ ){
 
                 $idRegistro = $arrNewAsignados[$i]['idRegistro'];
                 $idAsignado = $arrNewAsignados[$i]['asignado'];
-                
-                $queryUpdate = "UPDATE unifin_asignacion_po SET asignado_id = '{$idAsignado}' WHERE id = '{$idRegistro}';";
+                $currentDate = TimeDate::getInstance()->nowDb();
+
+                $queryUpdate = "UPDATE unifin_asignacion_po SET asignado_id = '{$idAsignado}', date_modified = '{$currentDate}', modified_by = '{$current_user->id}'  WHERE id = '{$idRegistro}';";
                 $GLOBALS['log']->fatal($queryUpdate);
                 
                 $GLOBALS['db']->query($queryUpdate);

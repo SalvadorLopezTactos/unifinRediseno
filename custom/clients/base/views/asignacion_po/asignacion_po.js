@@ -16,7 +16,8 @@
           this.loadView = true;
           asignacionPO = this;
           asignacionPO.lista_equipo = app.lang.getAppListStrings('equipo_list');
-          asignacionPO.listZonaGeografica = app.lang.getAppListStrings('zonageografica_list');
+          var estados = app.lang.getAppListStrings('zonageografica_list');
+          asignacionPO.listZonaGeografica = asignacionPO.ordenarZonaGeografica(estados);
 
           asignacionPO.listAsignadosActualizados = [];
 
@@ -73,6 +74,18 @@
             var route = app.router.buildRoute(this.module, null, '');
             app.router.navigate(route, {trigger: true});
         }
+    },
+
+    ordenarZonaGeografica: function( estados ){
+      // Convertir el objeto a un array de objetos con { id, estado }
+      const estadosArray = Object.entries(estados).map(([id, estado]) => {
+        return { id: Number(id), estado };
+      });
+
+      // Ordenar el array por el atributo 'estado' (alfabéticamente)
+      estadosArray.sort((a, b) => a.estado.localeCompare(b.estado));
+
+      return estadosArray;
     },
 
     getUsuariosActivos: function(){
@@ -150,12 +163,16 @@
             
           }
 
+          var valeEstadoSelected = $('.selectZonaGeografica').select2('val');
+
           asignacionPO.render();
 
           if( fromButton ){
 
             //Cambiamos nuevamente a la pestaña de asignación de usuario, ya que al aplicar el render, se regresa a la primer pestaña
             asignacionPO.cambiarAPestanaAsignacionUsuario();
+            $('.selectZonaGeografica').select2('val', valeEstadoSelected);
+
           }
         }, this)
 
