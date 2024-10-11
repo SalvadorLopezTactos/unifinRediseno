@@ -6,6 +6,7 @@
         'change .oficinas_atiende': 'actualizaOficinasAtiende',
         'click #btnGuardarAsignados': 'saveAsignados',
         'change .usersActive': 'updateAsignado',
+        'click #btnBuscaZonaGeografica': 'getRecordsPorZonaGeografica',
     },
 
     initialize: function(options){
@@ -15,6 +16,7 @@
           this.loadView = true;
           asignacionPO = this;
           asignacionPO.lista_equipo = app.lang.getAppListStrings('equipo_list');
+          asignacionPO.listZonaGeografica = app.lang.getAppListStrings('zonageografica_list');
 
           asignacionPO.listAsignadosActualizados = [];
 
@@ -61,7 +63,8 @@
               }
               asignacionPO.render();
 
-              asignacionPO.getRecordsSinEquipo();
+              //Se obtiene por default el valor 24 correspondiente a Aguascalientes (1er zona ordenada por orden alfabetico)
+              asignacionPO.getRecordsSinEquipo( 24, false );
             }, this)
           });
 
@@ -89,18 +92,23 @@
       });
     },
 
-    getRecordsSinEquipo: function(){
+    getRecordsSinEquipo: function( zonaGeografica, fromButton ){
       //selfAsignacion = this;
       app.alert.show('loadRegistrosAsignacionPoUsers', {
         level: 'process',
         title: 'Cargando...',
       });
-      app.api.call("read", app.api.buildURL('getAsignacionPoUsers'), null, {
+
+      $("#btnBuscaZonaGeografica").show();
+      $("#btnBuscaZonaGeografica").attr('disabled',true);
+      app.api.call("read", app.api.buildURL('getAsignacionPoUsers?idZonaGeografica=' + zonaGeografica ), null, {
 
         success: _.bind(function (data) {
+          $("#btnBuscaZonaGeografica").hide();
+          $("#btnBuscaZonaGeografica").removeAttr('disabled');
           app.alert.dismiss('loadRegistrosAsignacionPoUsers');
           if(data.length > 0) {
-
+            asignacionPO.zonaGeograficaDefault = data[0].zona_geografica;
             asignacionPO.listaAsignacionSinEquipo = [];
             asignacionPO.listaAsignacionPOSinEquipoPrevio = [];
 
@@ -133,14 +141,44 @@
           }else {
             asignacionPO.listaAsignacionSinEquipo = [];
             asignacionPO.listaAsignacionPOSinEquipoPrevio = [];
+
+            app.alert.show('sinRegistros', {
+              level: 'error',
+              title: 'Sin registros',
+              messages: "No se encontraron resultados para esta búsqueda"
+            });
             
           }
 
           asignacionPO.render();
 
+          if( fromButton ){
+
+            //Cambiamos nuevamente a la pestaña de asignación de usuario, ya que al aplicar el render, se regresa a la primer pestaña
+            asignacionPO.cambiarAPestanaAsignacionUsuario();
+          }
         }, this)
 
       });
+    },
+
+    cambiarAPestanaAsignacionUsuario: function() {
+      // Remover la clase 'active' de todas las pestañas y secciones de contenido
+      $('.nav-link').removeClass('active');
+      $('.tab-pane').removeClass('active');
+      
+      // Activar la pestaña de "Asignación de usuario"
+      $('a[href="#tab2"]').addClass('active');
+      
+      // Mostrar el contenido correspondiente a la pestaña "Asignación de usuario"
+      $('#tab2').addClass('active');
+  },
+
+
+    getRecordsPorZonaGeografica: function(){
+      var valZonaGeografica = $('.selectZonaGeografica').select2('val');
+      
+      asignacionPO.getRecordsSinEquipo( valZonaGeografica, true );
     },
 
     actualizaOficinasAtiende: function(evt) {
@@ -234,7 +272,7 @@
               autoClose: true
             });
 
-            asignacionPO.getRecordsSinEquipo();
+            asignacionPO.getRecordsSinEquipo(24, false);
 
           }, this),
         });

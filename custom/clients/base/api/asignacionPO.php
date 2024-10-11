@@ -99,13 +99,17 @@ class asignacionPO extends SugarApi
 
         global $db, $current_user;
 
+        $zonaGeografica = $args['idZonaGeografica'];
+
         try
         {
             $query = "SELECT a.*, m.name nMunicipio , concat(u.first_name, ' ', u.last_name)uName FROM unifin_asignacion_po a
             INNER JOIN users u on u.id=a.modified_by
             INNER join dire_municipio m on a.municipio = m.id 
             WHERE (zona_geografica != '' AND zona_geografica IS NOT NULL) AND
-            (municipio != '' AND municipio IS NOT NULL) AND (equipos IS NULL OR equipos = '' )";
+            (municipio != '' AND municipio IS NOT NULL) AND (equipos IS NULL OR equipos = '' )
+            AND zona_geografica = ".$zonaGeografica."
+            ORDER BY nMunicipio ASC";
             $resultado = $db->query($query);
             $restultado_list = [];
 
