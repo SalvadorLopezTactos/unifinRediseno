@@ -5317,6 +5317,23 @@
                             "validaDireccion":validaDireccion
                         };
 
+                        if( _.isEmpty( idCodigoPostal ) ){
+                            app.alert.show("no_match_sepomex", {
+                                level: "info",
+                                messages: 'Una dirección no está homologada con sepomex.<br>Favor de verificar.',
+                                autoClose: false
+                            });
+                            direccion['sinSepomex'] = true;
+
+                            direccion['oldCP'] = data.records[i].dire_direccion_dire_codigopostal_name;
+                            direccion['oldPais'] = data.records[i].dire_direccion_dire_pais_name;
+                            direccion['oldEstado'] = data.records[i].dire_direccion_dire_estado_name;
+                            direccion['oldMunicipio'] = data.records[i].dire_direccion_dire_municipio_name;
+                            direccion['oldCiudad'] = data.records[i].dire_direccion_dire_ciudad_name;
+                            direccion['oldColonia'] = data.records[i].dire_direccion_dire_colonia_name;
+
+                        }
+
                         //Agregar dirección
                         contexto_cuenta.oDirecciones.direccion.push(direccion);
 
@@ -9190,6 +9207,7 @@ validaReqUniclickInfo: function () {
 		app.api.call('read', url, {}, {
 			success: _.bind(function (resumen) {
                 contexto_cuenta.showSubpanels();
+                contexto_cuenta.renderDireccionSinSepomex();
 				if(resumen.error_dynamics365_c) {
 					app.alert.show('error_otp', {
 						level: 'warning',
@@ -9229,6 +9247,26 @@ validaReqUniclickInfo: function () {
           this.refreshAllSubpanels();
 
 
+    },
+
+    /**
+     * Se aplica render de account_direcciones en caso de que la(s) dirección(es) tengan el problema de que no tenga match con sepomex
+     */
+    renderDireccionSinSepomex:function(){
+        
+       const sinMatchSepomex = [];
+
+       for (let index = 0; index < contexto_cuenta.oDirecciones.direccion.length; index++) {
+        if( contexto_cuenta.oDirecciones.direccion[index].hasOwnProperty("sinSepomex") ){
+            sinMatchSepomex.push(1);
+        }
+       }
+
+       if( sinMatchSepomex.includes(1) ){
+
+        cont_dir.render();
+
+       }
     },
 
     refreshAllSubpanels: function() {

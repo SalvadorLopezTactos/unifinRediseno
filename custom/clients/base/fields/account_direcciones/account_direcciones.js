@@ -81,6 +81,16 @@
     },
 
     _render: function () {
+        /* Se agrega esta porción de código para cntrolar la muestra de dirección en caso de tener alguna dirección sin relación con sepomex */
+        if( typeof(contexto_cuenta.oDirecciones) == 'object' ){
+            if( typeof(contexto_cuenta.oDirecciones.direccion) == 'object' ){
+                if( this.oDirecciones == undefined && contexto_cuenta.oDirecciones.direccion ){
+                    this.oDirecciones = contexto_cuenta.oDirecciones;
+                }
+            }
+
+        }
+
         this._super("_render");
 
         if($('[data-fieldname="account_direcciones"] > span').length >0){
