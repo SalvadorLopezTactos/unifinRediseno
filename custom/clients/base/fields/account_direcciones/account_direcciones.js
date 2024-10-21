@@ -75,6 +75,7 @@
         }
         //Declaración de validation Tasks
         this.model.addValidationTask('check_multiple_fiscal', _.bind(this._doValidateDireccionIndicador, this));
+        this.model.addValidationTask('verificaDireccionSinSepomex', _.bind(this.verificaDireccionSinSepomex, this));
         //Declaración de modelo para nueva dirección
         this.nuevaDireccion = this.limpiaNuevaDireccion();
         this.cont_render = 0;
@@ -1255,6 +1256,54 @@
             }
         }
         //Callback para validación
+        callback(null, fields, errors);
+    },
+
+
+    verificaDireccionSinSepomex: function(fields, errors, callback){
+
+        var tipoRegistroCuenta = this.model.get('tipo_registro_cuenta_c');
+        var tipoRelacion = this.model.get('tipo_relacion_c');
+        var tiposRegistrosSepomexRequerido = App.lang.getAppListStrings('valida_match_sepomex_tipo_list');
+        var tiposRelacionSepomexRequerido = App.lang.getAppListStrings('valida_match_sepomex_relacion_list');
+
+        //Generamos arreglo con los tipos de Cuenta a los que se les debe pedir como requerido el llenado de sepomex
+        const keysTipoCuenta = Object.keys(tiposRegistrosSepomexRequerido);
+        const keysRelacionCuenta = Object.keys(tiposRelacionSepomexRequerido);
+
+        const existeRelacionParaPedirRequerida = tipoRelacion.some(item => keysRelacionCuenta.includes(item));
+
+
+        if( keysTipoCuenta.includes(tipoRegistroCuenta) ||  existeRelacionParaPedirRequerida ){
+
+            var arrSinSepomex = [];
+            //Recorremos las direcciones para saber si alguna direccion no está homologada con Sepomex
+            for (let index = 0; index < cont_dir.oDirecciones.direccion.length; index++) {
+                const element = cont_dir.oDirecciones.direccion[index];
+                var valCodigoPostal = element.valCodigoPostal;
+
+                
+                if( element.hasOwnProperty('sinSepomex') && _.isEmpty(valCodigoPostal) ){
+                    arrSinSepomex.push(1);
+                }
+            }
+
+            if( arrSinSepomex.includes(1) ){
+
+                $("#row-advice-no-match p").css("color", "red");
+
+                app.alert.show('no_sepomex_required', {
+                    level: 'error',
+                    autoClose: false,
+                    messages: 'Favor de completar la dirección que no está homologada con sepomex'
+                });
+    
+                errors['account_direcciones_sin_sepomex'] = errors['account_direcciones_sin_sepomex'] || {};
+                errors['account_direcciones_sin_sepomex'].required = true;
+
+            }
+        }
+
         callback(null, fields, errors);
     },
 
