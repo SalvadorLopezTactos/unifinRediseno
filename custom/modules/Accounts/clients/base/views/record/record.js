@@ -45,7 +45,7 @@
         this.model.addValidationTask('check_info', _.bind(this.doValidateInfoReq, this));
         //this.model.addValidationTask('macrosector', _.bind(this.macrosector, this));
         // this.model.addValidationTask('sectoreconomico', _.bind(this.sectoreconomico, this));
-        this.model.addValidationTask('checkEmptyFieldsDire', _.bind(this.validadirecc, this));
+        //this.model.addValidationTask('checkEmptyFieldsDire', _.bind(this.validadirecc, this));
         this.model.addValidationTask('change:email', _.bind(this.expmail, this));
         //Valida que el campo Alta Cedente este check en el perfil del usuario. Adrian Arauz 20/09/2018
         this.model.addValidationTask('check_alta_cedente', _.bind(this.validacedente, this));
@@ -2104,7 +2104,7 @@
                         console.log('Validacion Dir.Nacional');
                         var direcciones = this.oDirecciones.direccion;
                         for (i = 0; i < direcciones.length; i++) {
-                            if (direcciones[i].pais == 2 && direcciones[i].inactivo == 0) {
+                            if (direcciones[i].pais == 2 && direcciones[i].inactivo == 0 || direcciones[i].sinSepomex) {
                                 nacional = 1;
                             }
                         }
