@@ -9147,18 +9147,31 @@ validaReqUniclickInfo: function () {
 
     muestra_modal_alta_po: function(){
 
+        //Solo se muestra la ventana modal si el asesor logueado es el asesor leasing
+        var currentUserId = App.user.id;
+        var asesorLeasingId = this.model.get('user_id_c');
         var selfModalAltaPO = this;
-        app.drawer.open({
-            layout: 'layout-alta-po',
-            context: {
-                context: this.context,
-                model: this.model,
-            },
-        },function(context, model,update) {
-            console.log("CIERRA DRAWER ALTA PO");
-            
-            
-        });
+
+        if( currentUserId == asesorLeasingId ){
+
+            app.drawer.open({
+                layout: 'layout-alta-po',
+                context: {
+                    context: this.context,
+                    model: this.model,
+                },
+            },function(context, model,update) {
+                console.log("CIERRA DRAWER ALTA PO");
+                
+                
+            });
+        }else{
+            app.alert.show('sinPermisoModal', {
+                level: 'error',
+                messages: 'No cuentas con el privilegio para realizar esta acción, únicamente el Asesor Leasing es el que tiene el permiso',
+                autoClose: false
+            });
+        }
 
     },
 
