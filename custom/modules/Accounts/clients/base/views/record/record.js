@@ -330,6 +330,8 @@
         this.estableceOpcionesOrigen();
         //Clic solicitar CIEC
         this.context.on('button:solicitar_ciec:click', this.solicitar_ciec_function, this);
+        
+        this.context.on('button:alta_po:click', this.muestra_modal_alta_po, this);
         //Oculta Menú Solicitar CIEC
         this.model.on('sync', this.ocultaSolicitarCIEC, this);
         //Parche utilizado para ocultar las filas que siguen mostrándose aunque ningún campo se encuentren en ellas
@@ -9141,6 +9143,23 @@ validaReqUniclickInfo: function () {
                 });
             }
         });
+    },
+
+    muestra_modal_alta_po: function(){
+
+        var selfModalAltaPO = this;
+        app.drawer.open({
+            layout: 'layout-alta-po',
+            context: {
+                context: this.context,
+                model: this.model,
+            },
+        },function(context, model,update) {
+            console.log("CIERRA DRAWER ALTA PO");
+            
+            
+        });
+
     },
 
 	dynamics365:function(){

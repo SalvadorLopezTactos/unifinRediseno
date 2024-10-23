@@ -235,6 +235,13 @@ $viewdefs['Accounts']['base']['view']['record'] = array (
           'label' => 'Solicitar CIEC',
           'event' => 'button:solicitar_ciec:click',
         ),
+        19 => 
+        array (
+          'name' => 'alta_po',
+          'type' => 'rowaction',
+          'label' => 'Alta de PO',
+          'event' => 'button:alta_po:click',
+        ),
       ),
     ),
     9 => 
