@@ -40,12 +40,12 @@ class ObtenerRelacionesAltaPO extends SugarApi
                 'shortHelp' => 'Envía correo a dirctor para solicitar aprobacion de creación',
             ),
             'notificacionCreacionPO' => array(
-                'reqType' => 'GET',
+                'reqType' => 'POST',
                 'noLoginRequired' => true,
-                'path' => array('NotificacionCreacionPO','?'),
-                'pathVars' => array('method','tipoNotificacion'),
+                'path' => array('NotificacionCreacionPO'),
+                'pathVars' => array('method'),
                 'method' => 'enviaNotificacionRespuestaCreacionPO',
-                'shortHelp' => 'Dependiendo el tipoNotificacion, se envía notificación al asesor con la respuesta del director',
+                'shortHelp' => 'Dependiendo el tipoNotificacion (aprobación o rechazo, se envía notificación al asesor con la respuesta del director',
             ),
         );
     }
@@ -269,34 +269,172 @@ class ObtenerRelacionesAltaPO extends SugarApi
         }
 
         $bodyCorreo = $this->buildBodyEnviaPeticionAutorizacionDirector( $name_comercial, $idRegistro, $beanCuenta->name, $motivoCreacion );
+
         if( !empty($email_comercial) ){
 
-            $this->sendEmailPeticionAutorizacionDirector($email_comercial,$bodyCorreo,$beanCuenta->name );
+            $this->sendEmailPeticionAutorizacionDirector($email_comercial,$bodyCorreo,$beanCuenta->name, $idRegistro, $id_director_comercial );
 
-        }
-
-        return array(
-            "status" => "success",
-            "msj" => "Se ha enviado el correo"
+            return array(
+                "status" => "success",
+                "msj" => "Se ha enviado el correo"
             );
+
+        }else{
+
+            return array(
+                "status" => "info",
+                "msj" => "El director comercial no cuenta con un email válido"
+            );
+        }
 
     }
 
     public function enviaNotificacionRespuestaCreacionPO($api, $args){
 
         $tipoNotificacion = $args['tipoNotificacion'];
+        $idRegistro = $args['idRegistro'];
+        $nameRegistro = $args['nameRegistro'];
+        $idAsesor = $args['idAsesor'];
+        $nombreAsesor = $args['nombreAsesor'];
+
+        $mensaje = "";
+
+        //Obtenemos email del asesor
+        $emailAsesor = $this->getEmailAsesor($idAsesor);
 
         if( $tipoNotificacion == "autoriza" ){
+            //Enviamos correo de aprobación
+            
+            if( !empty($emailAsesor) ){
+                //Generamos cuerpo de correo
+                $bodyHtml = $this->buildBodyEnviaAutorizacionAsesor( $nombreAsesor, $idRegistro, $nameRegistro );
+
+                $this->sendEmailEnviaRespuestaDirector( $emailAsesor, "Autorización confirmada: Creación de nuevo PO – ".$nameRegistro, $bodyHtml );
+
+                $this->cleanFieldsResumen( $idRegistro );
+
+                $mensaje = "Se ha aprobado la creación del registro correctamente";
+
+            }else{
+                $mensaje = "El asesor no cuenta con un email válido";
+            }
+
             return array(
                 "status" => "autoriza",
-                "msj" => "SE ENVÍA CORREO DE AUTORIZACIÓN"
-                );
+                "msj" => $mensaje
+            );
         }else{
+
+            if( !empty($emailAsesor) ){
+                //Generamos cuerpo de correo
+                $bodyHtml = $this->buildBodyEnviaRechazoAsesor( $nombreAsesor, $idRegistro, $nameRegistro );
+
+                $this->sendEmailEnviaRespuestaDirector( $emailAsesor, "Solicitud rechazada: Creación de nuevo PO – ".$nameRegistro, $bodyHtml );
+
+                $this->cleanFieldsResumen( $idRegistro );
+
+                $mensaje = "Se ha rechazado la creación del registro correctamente";
+
+            }else{
+                $mensaje = "El asesor no cuenta con un email válido";
+            }
+
             return array(
                 "status" => "rechazo",
-                "msj" => "SE ENVÍA CORREO DE RECHAZO",
-                );
+                "msj" => $mensaje
+            );
         }
+    }
+
+    public function getEmailAsesor( $idAsesor ){
+
+        $beanAsesor = BeanFactory::getBean('Users', $idAsesor, array('disable_row_level_security' => true));
+
+        return $beanAsesor->email1;
+
+    }
+
+    public function buildBodyEnviaAutorizacionAsesor( $nombreAsesor, $idRegistro, $nombreRegistro ){
+
+        $linkCuenta = $GLOBALS['sugar_config']['site_url'] . '/#Accounts/' . $idRegistro;
+        $htmlLink = '<b><a id="linkCuenta" href="' . $linkCuenta . '">' . $nombreRegistro . '</a></b>';
+
+        $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f">Estimado/a '.$nombreAsesor.',<br><br>
+            El director ha autorizado la creación de un nuevo público objetivo para la cuenta de <br>
+            '.$htmlLink.'. Puedes proceder con el envío de la liga para que el cliente se registre en Unileasing 2.0.<br><br>
+            <br><br>Atentamente Unifin</font></p>
+            <br><br><img border="0" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png">
+            <br><span style="font-size:8.5pt;color:#757b80">____________________________________________</span>
+            <p class="MsoNormal" style="text-align: justify;">
+              <span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
+                Este correo electrónico y sus anexos pueden contener información CONFIDENCIAL para uso exclusivo de su destinatario. Si ha recibido este correo por error, por favor, notifíquelo al remitente y bórrelo de su sistema.
+                Las opiniones expresadas en este correo son las de su autor y no son necesariamente compartidas o apoyadas por UNIFIN, quien no asume aquí obligaciones ni se responsabiliza del contenido de este correo, a menos que dicha información sea confirmada por escrito por un representante legal autorizado.
+                No se garantiza que la transmisión de este correo sea segura o libre de errores, podría haber sido viciada, perdida, destruida, haber llegado tarde, de forma incompleta o contener VIRUS.
+                Asimismo, los datos personales, que en su caso UNIFIN pudiera recibir a través de este medio, mantendrán la seguridad y privacidad en los términos de la Ley Federal de Protección de Datos Personales; para más información consulte nuestro <a href="https://www.unifin.com.mx/aviso-de-privacidad" target="_blank">Aviso de Privacidad</a>  publicado en <a href="http://www.unifin.com.mx/" target="_blank">www.unifin.com.mx</a>
+              </span>
+            </p>';
+
+        return $mailHTML;
+
+    }
+
+    public function buildBodyEnviaRechazoAsesor( $nombreAsesor, $idRegistro, $nombreRegistro ){
+
+        $linkCuenta = $GLOBALS['sugar_config']['site_url'] . '/#Accounts/' . $idRegistro;
+        $htmlLink = '<b><a id="linkCuenta" href="' . $linkCuenta . '">' . $nombreRegistro . '</a></b>';
+
+        $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f">Estimado/a '.$nombreAsesor.',<br><br>
+            El director ha rechazado la solicitud de creación de un nuevo público objetivo para la cuenta de <br>
+            '.$htmlLink.'. Por favor, acércate con el responsable para recibir retroalimentación del caso.<br><br>
+            <br><br>Atentamente Unifin</font></p>
+            <br><br><img border="0" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png">
+            <br><span style="font-size:8.5pt;color:#757b80">____________________________________________</span>
+            <p class="MsoNormal" style="text-align: justify;">
+              <span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
+                Este correo electrónico y sus anexos pueden contener información CONFIDENCIAL para uso exclusivo de su destinatario. Si ha recibido este correo por error, por favor, notifíquelo al remitente y bórrelo de su sistema.
+                Las opiniones expresadas en este correo son las de su autor y no son necesariamente compartidas o apoyadas por UNIFIN, quien no asume aquí obligaciones ni se responsabiliza del contenido de este correo, a menos que dicha información sea confirmada por escrito por un representante legal autorizado.
+                No se garantiza que la transmisión de este correo sea segura o libre de errores, podría haber sido viciada, perdida, destruida, haber llegado tarde, de forma incompleta o contener VIRUS.
+                Asimismo, los datos personales, que en su caso UNIFIN pudiera recibir a través de este medio, mantendrán la seguridad y privacidad en los términos de la Ley Federal de Protección de Datos Personales; para más información consulte nuestro <a href="https://www.unifin.com.mx/aviso-de-privacidad" target="_blank">Aviso de Privacidad</a>  publicado en <a href="http://www.unifin.com.mx/" target="_blank">www.unifin.com.mx</a>
+              </span>
+            </p>';
+
+        return $mailHTML;
+
+    }
+
+    public function sendEmailEnviaRespuestaDirector( $emailAsesor, $asunto, $body_correo ){
+        $GLOBALS['log']->fatal("Enviando correo al asesor para informar respuesta del director");
+        $GLOBALS['log']->fatal("email: ".$emailAsesor);
+        try{
+            $mailer = MailerFactory::getSystemDefaultMailer();
+            $mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
+            $mailer->setSubject($asunto);
+            $body = trim($body_correo);
+            $mailer->setHtmlBody($body);
+            $mailer->clearRecipients();
+            
+            $mailer->addRecipientsTo(new EmailIdentity($emailAsesor, $emailAsesor));
+
+            $result = $mailer->send();
+
+        } catch (Exception $e){
+            $GLOBALS['log']->fatal("Exception: No se ha podido enviar el correo electrónico");
+            $GLOBALS['log']->fatal($e->getMessage());
+
+        }
+
+    }
+
+    public function cleanFieldsResumen( $idRegistro ){
+
+        $beanResumen = BeanFactory::getBean('tct02_Resumen', $idRegistro, array('disable_row_level_security' => true));
+        $GLOBALS['log']->fatal("Limpiamos bandera de PO creado y id de directorComercial");
+        
+        $beanResumen->id_dir_comercial_aprueba_c = '';
+        $beanResumen->po_creado_c = 0;
+
+        $beanResumen->save();
+
     }
 
     public function getIdDirectorComercial( $beanAsesor ){
@@ -366,7 +504,7 @@ class ObtenerRelacionesAltaPO extends SugarApi
 
     }
 
-    public function sendEmailPeticionAutorizacionDirector( $emailDirector, $body_correo, $nombreCuenta ){
+    public function sendEmailPeticionAutorizacionDirector( $emailDirector, $body_correo, $nombreCuenta, $idRegistro, $id_director_comercial ){
         $GLOBALS['log']->fatal("Enviando correo al director para aprobar envío de correo");
         $GLOBALS['log']->fatal("email: ".$emailDirector);
         try{
@@ -381,11 +519,28 @@ class ObtenerRelacionesAltaPO extends SugarApi
 
             $result = $mailer->send();
 
+            //Una vez enviado el correo, se estalece id del director en el módulo de resumen para saber cuando mostrar los botones de aprobación y rechazo
+            $this->setIdDirectorComercialParaAprobacion( $idRegistro, $id_director_comercial );
+
         } catch (Exception $e){
             $GLOBALS['log']->fatal("Exception: No se ha podido enviar el correo electrónico");
-            $GLOBALS['log']->fatal(print_r($e,true));
+            $GLOBALS['log']->fatal($e->getMessage());
 
         }
+
+    }
+
+    /**
+     * Establece id de director director comercial en resumen para cuando entre al registro de cuenta, saber cuando mostrar botones de aprobaci´+on y rechazo
+     */
+    public function setIdDirectorComercialParaAprobacion( $idRegistro, $idDirectorComercial ){
+        $GLOBALS['log']->fatal("SE ESTABLECE ID DE DIRECTOR EN RESUMEN: ".$idRegistro . " ". $idDirectorComercial);
+        $beanResumen = BeanFactory::getBean('tct02_Resumen', $idRegistro, array('disable_row_level_security' => true));
+        
+        $beanResumen->id_dir_comercial_aprueba_c = $idDirectorComercial;
+
+        $beanResumen->save();
+
 
     }
 

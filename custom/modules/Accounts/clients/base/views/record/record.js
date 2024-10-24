@@ -9147,31 +9147,49 @@ validaReqUniclickInfo: function () {
 
     muestra_modal_alta_po: function(){
 
-        //Solo se muestra la ventana modal si el asesor logueado es el asesor leasing
-        var currentUserId = App.user.id;
-        var asesorLeasingId = this.model.get('user_id_c');
         var selfModalAltaPO = this;
 
-        if( currentUserId == asesorLeasingId ){
+        //Mostramos el modal para el director leasing solo si se solictó la creación y si el asesor logueado es el asesor leasing
+        app.alert.show('loadingMuestraModal', {
+            level: 'process',
+            title: 'Cargando...',
+        });
 
-            app.drawer.open({
-                layout: 'layout-alta-po',
-                context: {
-                    context: this.context,
-                    model: this.model,
-                },
-            },function(context, model,update) {
-                console.log("CIERRA DRAWER ALTA PO");
+        var url = app.api.buildURL('tct02_Resumen/' + this.model.get('id'), null, null,);
+        app.api.call('GET', url, {}, {
+            success: function (data) {
+                app.alert.dismiss('loadingMuestraModal');
+
+                var asesorLeasingId = selfModalAltaPO.model.get('user_id_c');
+                var currentUserId =  App.user.id;
+
+                //Si el usuario logueado es igual al Director comercial y además ya se creó el PO, se muestra pantalla con botones para aprobar y rechazar
+                if( (data.po_creado_c == 1 && data.id_dir_comercial_aprueba_c == currentUserId ) || currentUserId == asesorLeasingId ){
+                    app.drawer.open({
+                        layout: 'layout-alta-po',
+                        context: {
+                            context: selfModalAltaPO.context,
+                            model: selfModalAltaPO.model,
+                        },
+                    },function(context, model,update) {
+                        console.log("CIERRA DRAWER ALTA PO");
+                        
+                        
+                    });
+
+                }else{
+
+                    app.alert.show('sinPermisoModal', {
+                        level: 'error',
+                        messages: 'No cuentas con el privilegio para realizar esta acción',
+                        autoClose: false
+                    });
+
+
+                }
                 
-                
-            });
-        }else{
-            app.alert.show('sinPermisoModal', {
-                level: 'error',
-                messages: 'No cuentas con el privilegio para realizar esta acción, únicamente el Asesor Leasing es el que tiene el permiso',
-                autoClose: false
-            });
-        }
+            }
+        });
 
     },
 
