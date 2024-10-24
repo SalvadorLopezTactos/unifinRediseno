@@ -8,6 +8,9 @@
         'click #btn-generar-po-manual': 'openDrawerPO',
         'click .closeModalAltaPO': 'cancelarAltaPO',
         'change .cbRelaciones': 'selectCheckBox',
+
+        'click #btn-rechazar-creacion': 'rechazarPeticionCrearPO',
+        'click #btn-aprobar-creacion': 'aprobarPeticionCrearPO',
     },
 
     initialize: function (options) {
@@ -16,6 +19,7 @@
         var idCuenta = options.context.get('model').id;
         this.relacionesCuenta = undefined;
         this.showRelaciones = true;
+        this.esDirectorComercial = false;
 
         if( idCuenta !== undefined && idCuenta !== ""){
             this.getRelacionesSinPO( idCuenta );
@@ -36,7 +40,16 @@
             success: function (data) {
                 app.alert.dismiss('validaPoCreado');
 
-                if(data.po_creado_c == 1){
+                //Si el usuario logueado es igual al Director comercial y además ya se creó el PO, se muestra pantalla con botones para aprobar y rechazar
+                if(data.po_creado_c == 1 && data.id_dir_comercial_aprueba_c == App.user.id ){
+                    contextAltaPO.esDirectorComercial = true;
+
+                    contextAltaPO.render();
+
+                }else if( data.po_creado_c == 1 && data.id_dir_comercial_aprueba_c !== App.user.id ){ 
+                    //Se muestra pantalla para ingresar motivo para crear PO en caso de que ya se haya creado un registro de PO anteriormente y 
+                    //el usuario logueado no sea igual al director comercial
+
                     contextAltaPO.showRelaciones = false;
 
                     contextAltaPO.render();
@@ -177,7 +190,7 @@
                 success: _.bind(function (data) {
                     $('#btn-solicitar-aprobacion').removeAttr('disabled');
                     app.alert.dismiss('setEnviandoCorreoDirector');
-                    
+
                     app.alert.show('correoEnviado', {
                         level: 'success',
                         messages: data['msj'],
@@ -326,6 +339,124 @@
                console.log(response);
             },contextAltaPO)
         });
-    }   
+    },
+
+    rechazarPeticionCrearPO: function(){
+
+        app.alert.show('message-id', {
+            level: 'confirmation',
+            messages: 'Estás a punto de <b>Rechazar</b> la petición para crear un nuevo registro de PO.<br>¿Confirmas la operación?',
+            autoClose: false,
+            onConfirm: function(){
+                 //Enviamos email de rechazo, limpiamos bandera y id de usurio en resumen
+                 var body={
+                    "tipoNotificacion": "rechazo",
+                    "idRegistro" : contextAltaPO.model.get('id'),
+                    "nameRegistro" : contextAltaPO.model.get('name'),
+                    "idAsesor": contextAltaPO.model.get('user_id_c'),
+                    "nombreAsesor": contextAltaPO.model.get('promotorleasing_c'),
+                }
+                app.alert.show('loadingRechazo', {
+                    level: 'process',
+                    closeable: false,
+                    messages: app.lang.get('LBL_LOADING'),
+                });
+
+                $('#btn-rechazar-creacion').attr('disabled', true);
+                $('#btn-aprobar-creacion').attr('disabled', true);
+                app.api.call('create', app.api.buildURL("NotificacionCreacionPO"), body, {
+                    success: _.bind(function (data) {
+                        app.alert.dismiss('loadingRechazo');
+
+                        $('#btn-rechazar-creacion').removeAttr('disabled');
+                        $('#btn-aprobar-creacion').removeAttr('disabled');
+                        
+                        app.alert.show('solicitudRechazada', {
+                            level: 'success',
+                            messages: data['msj'],
+                            autoClose: false
+                        });
+
+                        var modal = $('#myModalAltaPO');
+                        if (modal) {
+                            modal.hide();
+                        }
+            
+                        app.drawer.close();
+                        
+                    }, contextAltaPO),
+                    error: _.bind(function (response) {
+                        app.alert.dismiss('loadingRechazo');
+                       console.log("error al rechazar");
+                       console.log(response);
+                    },contextAltaPO)
+                });
+            },
+            onCancel: function(){
+               
+            }
+        });
+
+    },
+
+    aprobarPeticionCrearPO: function(){
+
+        app.alert.show('message-id', {
+            level: 'confirmation',
+            messages: 'Estás a punto de <b>Aprobar</b> la petición para crear un nuevo registro de PO.<br>¿Confirmas la operación?',
+            autoClose: false,
+            onConfirm: function(){
+
+                var body={
+                    "tipoNotificacion": "autoriza",
+                    "idRegistro" : contextAltaPO.model.get('id'),
+                    "nameRegistro" : contextAltaPO.model.get('name'),
+                    "idAsesor": contextAltaPO.model.get('user_id_c'),
+                    "nombreAsesor": contextAltaPO.model.get('promotorleasing_c'),
+                }
+                app.alert.show('loadingAutoriza', {
+                    level: 'process',
+                    closeable: false,
+                    messages: app.lang.get('LBL_LOADING'),
+                });
+
+                $('#btn-rechazar-creacion').attr('disabled', true);
+                $('#btn-aprobar-creacion').attr('disabled', true);
+
+                app.api.call('create', app.api.buildURL("NotificacionCreacionPO"), body, {
+                    success: _.bind(function (data) {
+                        app.alert.dismiss('loadingAutoriza');
+
+                        $('#btn-rechazar-creacion').removeAttr('disabled');
+                        $('#btn-aprobar-creacion').removeAttr('disabled');
+                        
+                        app.alert.show('solicitudAutorizada', {
+                            level: 'success',
+                            messages: data['msj'],
+                            autoClose: false
+                        });
+
+                        var modal = $('#myModalAltaPO');
+                        if (modal) {
+                            modal.hide();
+                        }
+            
+                        app.drawer.close();
+                        
+                    }, contextAltaPO),
+                    error: _.bind(function (response) {
+                        app.alert.dismiss('loadingRechazo');
+                       console.log("error al rechazar");
+                       console.log(response);
+                    },contextAltaPO)
+                });
+                 
+            },
+            onCancel: function(){
+               
+            }
+        });
+
+    },
 
 })
